@@ -1,0 +1,238 @@
+#                             -*- compilation -*-
+39. exclude04.at:19: testing exclude: case insensitive ...
+./exclude04.at:22:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir
+touch testdir/file1
+touch testdir/file2
+touch testdir/file3
+touch testdir/file4
+touch testdir/dir/File1
+touch testdir/dir/File2
+touch testdir/dir/File3
+touch testdir/dir/File4
+
+tar cf archive --exclude=FILE2 \
+               --exclude=file1 \
+               --ignore-case \
+               --exclude=file3 \
+               --no-ignore-case \
+               --exclude=FILE2 \
+               --exclude=file4 \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive testdir
+tar t --wildcards --wildcards-match-slash '*File2' -f archive | sort
+
+echo "SUB 2"
+tar t --wildcards --wildcards-match-slash --ignore-case '*File2' -f archive | sort
+
+echo "SUB 3"
+tar t --wildcards --wildcards-match-slash --no-ignore-case '*File2' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude04.at:22:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir
+touch testdir/file1
+touch testdir/file2
+touch testdir/file3
+touch testdir/file4
+touch testdir/dir/File1
+touch testdir/dir/File2
+touch testdir/dir/File3
+touch testdir/dir/File4
+
+tar cf archive --exclude=FILE2 \
+               --exclude=file1 \
+               --ignore-case \
+               --exclude=file3 \
+               --no-ignore-case \
+               --exclude=FILE2 \
+               --exclude=file4 \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive testdir
+tar t --wildcards --wildcards-match-slash '*File2' -f archive | sort
+
+echo "SUB 2"
+tar t --wildcards --wildcards-match-slash --ignore-case '*File2' -f archive | sort
+
+echo "SUB 3"
+tar t --wildcards --wildcards-match-slash --no-ignore-case '*File2' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude04.at:22:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir
+touch testdir/file1
+touch testdir/file2
+touch testdir/file3
+touch testdir/file4
+touch testdir/dir/File1
+touch testdir/dir/File2
+touch testdir/dir/File3
+touch testdir/dir/File4
+
+tar cf archive --exclude=FILE2 \
+               --exclude=file1 \
+               --ignore-case \
+               --exclude=file3 \
+               --no-ignore-case \
+               --exclude=FILE2 \
+               --exclude=file4 \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive testdir
+tar t --wildcards --wildcards-match-slash '*File2' -f archive | sort
+
+echo "SUB 2"
+tar t --wildcards --wildcards-match-slash --ignore-case '*File2' -f archive | sort
+
+echo "SUB 3"
+tar t --wildcards --wildcards-match-slash --no-ignore-case '*File2' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude04.at:22:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir
+touch testdir/file1
+touch testdir/file2
+touch testdir/file3
+touch testdir/file4
+touch testdir/dir/File1
+touch testdir/dir/File2
+touch testdir/dir/File3
+touch testdir/dir/File4
+
+tar cf archive --exclude=FILE2 \
+               --exclude=file1 \
+               --ignore-case \
+               --exclude=file3 \
+               --no-ignore-case \
+               --exclude=FILE2 \
+               --exclude=file4 \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive testdir
+tar t --wildcards --wildcards-match-slash '*File2' -f archive | sort
+
+echo "SUB 2"
+tar t --wildcards --wildcards-match-slash --ignore-case '*File2' -f archive | sort
+
+echo "SUB 3"
+tar t --wildcards --wildcards-match-slash --no-ignore-case '*File2' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude04.at:22:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir
+touch testdir/file1
+touch testdir/file2
+touch testdir/file3
+touch testdir/file4
+touch testdir/dir/File1
+touch testdir/dir/File2
+touch testdir/dir/File3
+touch testdir/dir/File4
+
+tar cf archive --exclude=FILE2 \
+               --exclude=file1 \
+               --ignore-case \
+               --exclude=file3 \
+               --no-ignore-case \
+               --exclude=FILE2 \
+               --exclude=file4 \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive testdir
+tar t --wildcards --wildcards-match-slash '*File2' -f archive | sort
+
+echo "SUB 2"
+tar t --wildcards --wildcards-match-slash --ignore-case '*File2' -f archive | sort
+
+echo "SUB 3"
+tar t --wildcards --wildcards-match-slash --no-ignore-case '*File2' -f archive | sort
+
+rm -rf testdir
+
+)
+39. exclude04.at:19: 39. exclude: case insensitive (exclude04.at:19): UNEXPECTED PASS     (0m0.004s 0m0.024s)

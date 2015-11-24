@@ -1,0 +1,94 @@
+#                             -*- compilation -*-
+86. listed02.at:28: testing working --listed ...
+./listed02.at:31:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+echo Create directories
+
+mkdir tart
+sleep 1
+mkdir tart/c0
+sleep 1
+mkdir tart/c1
+sleep 1
+
+for file in tart/a1 tart/b1 tart/c0/cq1 tart/c0/cq2 tart/c1/ca1 tart/c1/ca2
+do
+  echo File $file > $file
+  sleep 1
+done
+
+sleep 1
+echo Creating main archive
+echo >&2 "Creating main archive"
+tar -c -v --listed-incremental=tart.incr1 -f archive.1 tart 2> err || exit 1
+
+# The above prints two lines to stderr announcing the new directories c0 and c1.
+# Ensure that they appear in this script's stderr in sorted order.
+sort err 1>&2; rm -f err
+
+sleep 1
+echo Modifying filesystem
+rm tart/a1
+
+mv tart/b1 tart/b2
+mv tart/c1 tart/c2
+touch tart/c2/ca3
+
+echo Directory contents
+find tart -print | sort 2>/dev/null
+
+sleep 1
+echo Creating incremental archive
+echo >&2 "Creating incremental archive"
+cp -p tart.incr1 tart.incr2
+tar -c -v --listed-incremental=tart.incr2 -f archive.2 tart || exit 1
+
+sleep 1
+
+rm -rf tart/*
+echo Extracting main archive
+echo >&2 "Extracting main archive"
+tar -x -v --listed-incremental=tart.incr1 -f archive.1 || exit 1
+echo Extracting incremental archive
+# This command should produce three messages about deletion
+# of the existing files, that may appear in any order. Piping
+# to sort makes sure we don't depend on any particular ordering.
+tar -x -v --listed-incremental=tart.incr2 -f archive.2 | sort 2>/dev/null
+
+echo Final files:
+find tart -print | sort 2>/dev/null
+)
+--- -	2015-11-24 15:39:14.603852133 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/86/stderr	2015-11-24 15:39:14.598164389 +0800
+@@ -3,6 +3,6 @@
+ tar: tart/c1: Directory is new
+ tar: tart: Directory is new
+ Creating incremental archive
+-tar: tart/c2: Directory has been renamed from 'tart/c1'
++tar: tart/c2: Directory has been renamed from `tart/c1'
+ Extracting main archive
+ 
+--- -	2015-11-24 15:39:14.605748927 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/86/stdout	2015-11-24 15:39:14.602164388 +0800
+@@ -37,8 +37,8 @@
+ tart/c1/ca1
+ tart/c1/ca2
+ Extracting incremental archive
+-tar: Deleting 'tart/a1'
+-tar: Deleting 'tart/b1'
++tar: Deleting `tart/a1'
++tar: Deleting `tart/b1'
+ tart/
+ tart/b2
+ tart/c0/
+86. listed02.at:28: 86. working --listed (listed02.at:28): expected failure (listed02.at:31)

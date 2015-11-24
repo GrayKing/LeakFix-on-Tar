@@ -1,0 +1,58 @@
+#                             -*- compilation -*-
+119. multiv03.at:30: testing MV archive & long filenames ...
+./multiv03.at:33:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+AFILE=`awk 'BEGIN { for (i = 0; i < 100; i++) printf "a"; exit; }'`
+BFILE=`awk 'BEGIN { for (i = 0; i < 101; i++) printf "b"; exit; }'`
+
+cat > ../experr <<EOF
+tar: $BFILE: file name too long to be stored in a GNU multivolume header, truncated
+tar: '$BFILE' is possibly continued on this volume: header contains truncated name
+EOF
+
+cat > ../expout <<EOF
+$AFILE
+separator-1
+separator-2
+EOF
+
+genfile --length 15360 --file $AFILE
+
+exec <&-
+
+tar -M -L 10 -c -f arch.1 -f arch.2 $AFILE || exit 1
+tar -tM -f arch.1 -f arch.2 || exit 1
+
+echo separator-1
+
+genfile --length 15360 --file $BFILE
+tar -M -L 10 -c -f arch.1 -f arch.2 $BFILE || exit 1
+
+echo separator-2
+mv $BFILE bfile
+tar -M -x -f arch.1 -f arch.2 --warning=no-timestamp || exit 1
+cmp $BFILE bfile
+)
+--- experr	2015-11-24 15:39:21.926164135 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/119/stderr	2015-11-24 15:39:21.926164135 +0800
+@@ -1,2 +1,3 @@
+-tar: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb: file name too long to be stored in a GNU multivolume header, truncated
+-tar: 'bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb' is possibly continued on this volume: header contains truncated name
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/119/test-source: line 78: genfile: command not found
++tar: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+--- expout	2015-11-24 15:39:21.926164135 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/119/stdout	2015-11-24 15:39:21.914164135 +0800
+@@ -1,3 +0,0 @@
+-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+-separator-1
+-separator-2
+./multiv03.at:33: exit code was 1, expected 0
+119. multiv03.at:30: 119. MV archive & long filenames (multiv03.at:30): expected failure (multiv03.at:33)

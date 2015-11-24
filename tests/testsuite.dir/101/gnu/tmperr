@@ -1,0 +1,3 @@
+tar: foo/a: Directory has been renamed from `foo/c'
+tar: foo/b: Directory has been renamed from `foo/a'
+tar: foo/c: Directory has been renamed from `foo/b'

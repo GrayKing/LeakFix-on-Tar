@@ -1,0 +1,27 @@
+#                             -*- compilation -*-
+76. backup01.at:33: testing extracting existing dir with --backup ...
+./backup01.at:36:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+unset VERSION_CONTROL
+mkdir dir1 dir2
+echo bla > dir1/file1
+tar cf test.tar dir1 dir2
+tar xfv test.tar --backup --warning=no-timestamp
+)
+--- -	2015-11-24 15:38:43.966320438 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/76/stdout	2015-11-24 15:38:43.962165451 +0800
+@@ -1,5 +1,5 @@
+ dir1/
+ dir1/file1
+-Renaming 'dir1/file1' to 'dir1/file1~'
++Renaming `dir1/file1' to `dir1/file1~'
+ dir2/
+ 
+76. backup01.at:33: 76. extracting existing dir with --backup (backup01.at:33): expected failure (backup01.at:36)

@@ -1,0 +1,223 @@
+#                             -*- compilation -*-
+38. exclude03.at:19: testing exclude: wildcards match slash ...
+./exclude03.at:22:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir1 testdir/dir2 testdir/dir3
+touch testdir/\*f\*1
+touch testdir/dir1/file1
+touch testdir/dir1/\*
+touch testdir/dir2/file2
+touch testdir/dir2/\*
+touch testdir/dir3/file3
+touch testdir/dir3/\*
+
+tar cf archive --exclude='testdir*f*1' \
+               --no-wildcards-match-slash \
+               --exclude='testdir*f*2' \
+               --wildcards-match-slash \
+               --exclude='testdir*f*3' \
+               testdir
+tar tf archive | sort
+
+echo "NEXT"
+tar cf archive testdir
+tar t --wildcards 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --no-wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude03.at:22:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir1 testdir/dir2 testdir/dir3
+touch testdir/\*f\*1
+touch testdir/dir1/file1
+touch testdir/dir1/\*
+touch testdir/dir2/file2
+touch testdir/dir2/\*
+touch testdir/dir3/file3
+touch testdir/dir3/\*
+
+tar cf archive --exclude='testdir*f*1' \
+               --no-wildcards-match-slash \
+               --exclude='testdir*f*2' \
+               --wildcards-match-slash \
+               --exclude='testdir*f*3' \
+               testdir
+tar tf archive | sort
+
+echo "NEXT"
+tar cf archive testdir
+tar t --wildcards 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --no-wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude03.at:22:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir1 testdir/dir2 testdir/dir3
+touch testdir/\*f\*1
+touch testdir/dir1/file1
+touch testdir/dir1/\*
+touch testdir/dir2/file2
+touch testdir/dir2/\*
+touch testdir/dir3/file3
+touch testdir/dir3/\*
+
+tar cf archive --exclude='testdir*f*1' \
+               --no-wildcards-match-slash \
+               --exclude='testdir*f*2' \
+               --wildcards-match-slash \
+               --exclude='testdir*f*3' \
+               testdir
+tar tf archive | sort
+
+echo "NEXT"
+tar cf archive testdir
+tar t --wildcards 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --no-wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude03.at:22:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir1 testdir/dir2 testdir/dir3
+touch testdir/\*f\*1
+touch testdir/dir1/file1
+touch testdir/dir1/\*
+touch testdir/dir2/file2
+touch testdir/dir2/\*
+touch testdir/dir3/file3
+touch testdir/dir3/\*
+
+tar cf archive --exclude='testdir*f*1' \
+               --no-wildcards-match-slash \
+               --exclude='testdir*f*2' \
+               --wildcards-match-slash \
+               --exclude='testdir*f*3' \
+               testdir
+tar tf archive | sort
+
+echo "NEXT"
+tar cf archive testdir
+tar t --wildcards 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --no-wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+rm -rf testdir
+
+)
+./exclude03.at:22:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir/dir1 testdir/dir2 testdir/dir3
+touch testdir/\*f\*1
+touch testdir/dir1/file1
+touch testdir/dir1/\*
+touch testdir/dir2/file2
+touch testdir/dir2/\*
+touch testdir/dir3/file3
+touch testdir/dir3/\*
+
+tar cf archive --exclude='testdir*f*1' \
+               --no-wildcards-match-slash \
+               --exclude='testdir*f*2' \
+               --wildcards-match-slash \
+               --exclude='testdir*f*3' \
+               testdir
+tar tf archive | sort
+
+echo "NEXT"
+tar cf archive testdir
+tar t --wildcards 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --no-wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+echo "NEXT"
+tar t --wildcards --wildcards-match-slash 'testdir/*f*1' -f archive | sort
+
+rm -rf testdir
+
+)
+38. exclude03.at:19: 38. exclude: wildcards match slash (exclude03.at:19): UNEXPECTED PASS     (0m0.008s 0m0.048s)

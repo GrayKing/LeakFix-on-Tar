@@ -1,0 +1,43 @@
+#                             -*- compilation -*-
+2. pipe.at:29: testing decompressing from stdin ...
+./pipe.at:33:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+mkdir directory
+genfile --length 10240 --pattern zeros --file directory/file1
+genfile --length 13 --file directory/file2
+tar cf archive directory
+mv directory orig
+cat archive | tar xfv - --warning=no-timestamp | sort
+echo "separator"
+cmp orig/file1 directory/file1
+echo "separator"
+cmp orig/file2 directory/file2)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/2/stderr	2015-11-24 15:38:31.046165898 +0800
+@@ -0,0 +1,4 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/2/test-source: line 53: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/2/test-source: line 54: genfile: command not found
++cmp: orig/file1: No such file or directory
++cmp: orig/file2: No such file or directory
+--- -	2015-11-24 15:38:31.054914695 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/2/stdout	2015-11-24 15:38:31.050165898 +0800
+@@ -1,6 +1,4 @@
+ directory/
+-directory/file1
+-directory/file2
+ separator
+ separator
+ 
+./pipe.at:33: exit code was 2, expected 0
+2. pipe.at:29: 2. decompressing from stdin (pipe.at:29): expected failure (pipe.at:33)

@@ -1,0 +1,42 @@
+#                             -*- compilation -*-
+120. multiv04.at:36: testing split directory members in a MV archive ...
+./multiv04.at:39:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+mkdir directory
+awk 'BEGIN { for (i = 0; i < 1024; i++) printf("directory/%014x\n", i); }' </dev/null | genfile --files-from -
+
+exec <&-
+
+sleep 2
+
+tar --listed-incremental=list -c -f archive.a directory
+
+sleep 2
+
+tar --listed-incremental=list -c --record-size 1024 -L 16 -f arc.1 -f arc.2 -v directory
+
+echo separator
+
+tar -MRt -f arc.1 -f arc.2)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/120/stderr	2015-11-24 15:39:21.958164133 +0800
+@@ -0,0 +1 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/120/test-source: line 52: genfile: command not found
+--- -	2015-11-24 15:39:25.979350472 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/120/stdout	2015-11-24 15:39:25.974163994 +0800
+@@ -1,5 +1,5 @@
+ directory/
+ separator
+ block 0: directory/
+-block 35: ** Block of NULs **
++block 2: ** Block of NULs **
+ 
+120. multiv04.at:36: 120. split directory members in a MV archive (multiv04.at:36): expected failure (multiv04.at:39)

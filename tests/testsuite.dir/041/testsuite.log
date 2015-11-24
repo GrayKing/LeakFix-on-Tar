@@ -1,0 +1,32 @@
+#                             -*- compilation -*-
+41. exclude06.at:26: testing exclude: long files in pax archives ...
+./exclude06.at:31:
+mkdir pax
+(cd pax
+TEST_TAR_FORMAT=pax
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H pax"
+export TAR_OPTIONS
+rm -rf *
+
+
+install-sh -d one/two/three/four/five/six/seven/eight/nine/ten/eleven/twelve/thirteen/fourteen/fifteen/sixteen/seventeen >/dev/null  || exit 77
+genfile --length 20 -f one/two/three/four/five/six/seven/eight/nine/ten/eleven/twelve/thirteen/fourteen/fifteen/sixteen/seventeen/1.txt
+genfile --length 20 -f one/two/three/four/five/six/seven/eight/nine/ten/eleven/twelve/thirteen/fourteen/fifteen/sixteen/seventeen/1.c
+
+tar cf archive.tar one/two/three/four/five/six/seven/eight/nine/ten/eleven/twelve/thirteen/fourteen/fifteen/sixteen/seventeen
+mkdir out
+tar -C out -xf archive.tar --exclude='*.txt' --warning=no-timestamp
+find out -type f
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/41/stderr	2015-11-24 15:38:41.682165530 +0800
+@@ -0,0 +1,2 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/41/test-source: line 47: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/41/test-source: line 48: genfile: command not found
+--- -	2015-11-24 15:38:41.700372100 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/41/stdout	2015-11-24 15:38:41.694165529 +0800
+@@ -1,2 +1 @@
+-out/one/two/three/four/five/six/seven/eight/nine/ten/eleven/twelve/thirteen/fourteen/fifteen/sixteen/seventeen/1.c
+ 
+41. exclude06.at:26: 41. exclude: long files in pax archives (exclude06.at:26): expected failure (exclude06.at:31)

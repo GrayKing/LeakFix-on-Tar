@@ -1,0 +1,48 @@
+#                             -*- compilation -*-
+162. remfiles08b.at:31: testing remove-files deleting two subdirs in -c/incr. mode ...
+./remfiles08b.at:36:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir foo
+mkdir bar
+echo foo/foo_file > foo/foo_file
+echo bar/bar_file > bar/bar_file
+decho A
+tar -cvf foo.tar --incremental --remove-files -C foo . -C ../bar .
+decho B
+find .
+)
+--- -	2015-11-24 15:39:31.474238096 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/162/stderr	2015-11-24 15:39:31.466163804 +0800
+@@ -1,5 +1,7 @@
+ A
+ tar: .: Directory is new
+-tar: .: Directory is new
++tar: .: Directory has been renamed
++tar: /root/Desktop/tar-1.28/tests/testsuite.dir/162/gnu: Cannot rmdir: Directory not empty
++tar: Exiting with failure status due to previous errors
+ B
+ 
+--- -	2015-11-24 15:39:31.476538658 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/162/stdout	2015-11-24 15:39:31.470163804 +0800
+@@ -1,9 +1,11 @@
+ A
+ ./
+-./
+-./foo_file
+ ./bar_file
+ B
+ .
++./bar
++./bar/bar_file
++./foo
++./foo/foo_file
+ ./foo.tar
+ 
+162. remfiles08b.at:31: 162. remove-files deleting two subdirs in -c/incr. mode (remfiles08b.at:31): expected failure (remfiles08b.at:36)

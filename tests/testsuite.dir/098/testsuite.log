@@ -1,0 +1,31 @@
+#                             -*- compilation -*-
+98. filerem02.at:26: testing toplevel file removed (ca. 24 seconds) ...
+./filerem02.at:29:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir dir
+mkdir dir/sub
+genfile --file dir/file1
+genfile --file dir/sub/file2
+mkdir dir2
+genfile --file dir2/file1
+
+genfile --run --checkpoint=3 --exec 'rm -rf dir2' -- \
+       tar --blocking-factor=1 --checkpoint=1 --checkpoint-action='sleep=1' \
+       --checkpoint-action='echo' -c -f archive.tar \
+       --listed-incremental db -v --warning=no-new-dir dir dir2 >/dev/null
+)
+stderr:
+/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/98/test-source: line 47: genfile: command not found
+/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/98/test-source: line 48: genfile: command not found
+/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/98/test-source: line 50: genfile: command not found
+/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/98/test-source: line 52: genfile: command not found
+stdout:
+./filerem02.at:29: exit code was 127, expected 2
+98. filerem02.at:26: 98. toplevel file removed (ca. 24 seconds) (filerem02.at:26): expected failure (filerem02.at:29)

@@ -1,0 +1,41 @@
+#                             -*- compilation -*-
+156. remfiles06b.at:25: testing remove-files with -C:rel,abs in -c/incr. mode ...
+./remfiles06b.at:28:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir foo
+mkdir bar
+echo file > file
+echo foo/file > foo/file
+echo bar/file > bar/file
+DIR=`pwd`
+decho A
+tar -cvf foo.tar --incremental --remove-files -C foo file -C $DIR/bar file
+decho B
+find . | sort
+)
+--- -	2015-11-24 15:39:31.246078755 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/156/stdout	2015-11-24 15:39:31.242163812 +0800
+@@ -1,10 +1,10 @@
+ A
+ file
+-file
+ B
+ .
+ ./bar
+-./file
++./bar/file
+ ./foo
+ ./foo.tar
++./foo/file
+ 
+156. remfiles06b.at:25: 156. remove-files with -C:rel,abs in -c/incr. mode (remfiles06b.at:25): expected failure (remfiles06b.at:28)

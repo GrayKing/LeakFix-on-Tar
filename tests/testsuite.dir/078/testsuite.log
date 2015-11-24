@@ -1,0 +1,37 @@
+#                             -*- compilation -*-
+78. label02.at:21: testing multi-volume label ...
+./label02.at:24:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+exec <&-
+genfile --length 0 --file foo
+genfile --length 12288 --file bar
+genfile --length 12288 --file baz
+tar --label=Test -cM -L10 -f 1.tar -f 2.tar -f 3.tar -f 4.tar foo bar baz
+tar -Mt -f 1.tar -f 2.tar -f 3.tar -f 4.tar
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/78/stderr	2015-11-24 15:38:44.030165448 +0800
+@@ -0,0 +1,7 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/78/test-source: line 41: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/78/test-source: line 42: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/78/test-source: line 43: genfile: command not found
++tar: foo: Cannot stat: No such file or directory
++tar: bar: Cannot stat: No such file or directory
++tar: baz: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:44.042747960 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/78/stdout	2015-11-24 15:38:44.038165448 +0800
+@@ -1,5 +1,2 @@
+ Test Volume 1
+-foo
+-bar
+-baz
+ 
+78. label02.at:21: 78. multi-volume label (label02.at:21): expected failure (label02.at:24)

@@ -1,0 +1,20 @@
+#                             -*- compilation -*-
+88. listed04.at:26: testing --listed-incremental and --one-file-system ...
+./listed04.at:29:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+mkdir dir
+echo a >dir/a
+echo b >dir/b
+
+tar --one-file-system -cvf archive.tar -g archive.incr dir || exit
+tar -tf archive.tar || exit
+)
+88. listed04.at:26: 88. --listed-incremental and --one-file-system (listed04.at:26): UNEXPECTED PASS     (0m0.000s 0m0.012s)

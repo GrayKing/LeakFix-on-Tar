@@ -1,0 +1,63 @@
+#                             -*- compilation -*-
+137. verify.at:25: testing verify ...
+./verify.at:28:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+touch foo
+tar -cvf archive.tar --verify foo
+)
+./verify.at:28:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+touch foo
+tar -cvf archive.tar --verify foo
+)
+./verify.at:28:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+touch foo
+tar -cvf archive.tar --verify foo
+)
+./verify.at:28:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+touch foo
+tar -cvf archive.tar --verify foo
+)
+./verify.at:28:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+touch foo
+tar -cvf archive.tar --verify foo
+)
+137. verify.at:25: 137. verify (verify.at:25): UNEXPECTED PASS     (0m0.000s 0m0.000s)

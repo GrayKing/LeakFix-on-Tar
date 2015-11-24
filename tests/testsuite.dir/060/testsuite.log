@@ -1,0 +1,128 @@
+#                             -*- compilation -*-
+60. extrac04.at:23: testing extract + fnmatch ...
+./extrac04.at:26:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+touch file1
+mkdir directory
+mkdir directory/subdirectory
+touch directory/file1
+touch directory/file2
+touch directory/subdirectory/file1
+touch directory/subdirectory/file2
+tar -cf archive ./file1 directory
+tar -tf archive \
+  --exclude='./*1' \
+  --exclude='d*/*1' \
+  --exclude='d*/s*/*2' | sort
+)
+./extrac04.at:26:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+touch file1
+mkdir directory
+mkdir directory/subdirectory
+touch directory/file1
+touch directory/file2
+touch directory/subdirectory/file1
+touch directory/subdirectory/file2
+tar -cf archive ./file1 directory
+tar -tf archive \
+  --exclude='./*1' \
+  --exclude='d*/*1' \
+  --exclude='d*/s*/*2' | sort
+)
+./extrac04.at:26:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+touch file1
+mkdir directory
+mkdir directory/subdirectory
+touch directory/file1
+touch directory/file2
+touch directory/subdirectory/file1
+touch directory/subdirectory/file2
+tar -cf archive ./file1 directory
+tar -tf archive \
+  --exclude='./*1' \
+  --exclude='d*/*1' \
+  --exclude='d*/s*/*2' | sort
+)
+./extrac04.at:26:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+touch file1
+mkdir directory
+mkdir directory/subdirectory
+touch directory/file1
+touch directory/file2
+touch directory/subdirectory/file1
+touch directory/subdirectory/file2
+tar -cf archive ./file1 directory
+tar -tf archive \
+  --exclude='./*1' \
+  --exclude='d*/*1' \
+  --exclude='d*/s*/*2' | sort
+)
+./extrac04.at:26:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+touch file1
+mkdir directory
+mkdir directory/subdirectory
+touch directory/file1
+touch directory/file2
+touch directory/subdirectory/file1
+touch directory/subdirectory/file2
+tar -cf archive ./file1 directory
+tar -tf archive \
+  --exclude='./*1' \
+  --exclude='d*/*1' \
+  --exclude='d*/s*/*2' | sort
+)
+60. extrac04.at:23: 60. extract + fnmatch (extrac04.at:23): UNEXPECTED PASS     (0m0.012s 0m0.004s)

@@ -1,0 +1,37 @@
+#                             -*- compilation -*-
+165. remfiles09b.at:29: testing remove-files on full directory in -c/incr. mode ...
+./remfiles09b.at:34:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir foo
+echo foo/file > foo/file
+decho A
+tar -cvf foo.tar --incremental --remove-files foo
+decho B
+find .
+)
+--- -	2015-11-24 15:39:31.586585946 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/165/stderr	2015-11-24 15:39:31.582163800 +0800
+@@ -1,4 +1,6 @@
+ A
+ tar: foo: Directory is new
++tar: /root/Desktop/tar-1.28/tests/testsuite.dir/165/gnu/foo: Cannot rmdir: Directory not empty
++tar: Exiting with failure status due to previous errors
+ B
+ 
+--- -	2015-11-24 15:39:31.588371815 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/165/stdout	2015-11-24 15:39:31.582163800 +0800
+@@ -3,5 +3,6 @@
+ foo/file
+ B
+ .
++./foo
+ ./foo.tar
+ 
+165. remfiles09b.at:29: 165. remove-files on full directory in -c/incr. mode (remfiles09b.at:29): expected failure (remfiles09b.at:34)

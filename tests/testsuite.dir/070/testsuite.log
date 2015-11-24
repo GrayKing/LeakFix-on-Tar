@@ -1,0 +1,19 @@
+#                             -*- compilation -*-
+70. extrac14.at:25: testing extract -C symlink ...
+./extrac14.at:28:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir dest
+ln -s dest symlink
+echo foo >foo
+tar -cf archive.tar foo &&
+tar -xf archive.tar -C symlink --warning=no-timestamp &&
+cmp foo dest/foo
+)
+70. extrac14.at:25: 70. extract -C symlink (extrac14.at:25): UNEXPECTED PASS     (0m0.000s 0m0.000s)

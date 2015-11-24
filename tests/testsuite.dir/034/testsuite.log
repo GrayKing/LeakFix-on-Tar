@@ -1,0 +1,28 @@
+#                             -*- compilation -*-
+34. xform01.at:26: testing transformations and GNU volume labels ...
+./xform01.at:29:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --file file
+tar -cf archive.tar -V /label/ file
+tar tf archive.tar
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/34/stderr	2015-11-24 15:38:35.158165756 +0800
+@@ -0,0 +1,3 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/34/test-source: line 37: genfile: command not found
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:35.166758729 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/34/stdout	2015-11-24 15:38:35.162165756 +0800
+@@ -1,3 +1,2 @@
+ /label/
+-file
+ 
+34. xform01.at:26: 34. transformations and GNU volume labels (xform01.at:26): expected failure (xform01.at:29)

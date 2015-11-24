@@ -1,0 +1,60 @@
+#                             -*- compilation -*-
+89. listed05.at:33: testing --listed-incremental and remounted directories ...
+./listed05.at:36:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+echo "test" > $$
+chmod 0 $$
+cat $$ > /dev/null 2>&1
+result=$?
+rm -f $$
+test $result -eq 0 || exit 77
+
+options="-C tartest --create --one-file-system --verbose"
+rm -rf archive-01.snar archive-01.tar tartest subdir
+
+# Create initial structure
+mkdir tartest
+echo "hi" > tartest/top-level-file
+mkdir tartest/subdir
+echo "hi" > tartest/subdir/subdir-file
+
+echo "# Level 0"
+tar $options --file archive-0.tar --listed-incremental=archive-0.snar .
+
+echo "# Remount"
+mv tartest/subdir .
+mkdir tartest/subdir
+mount -t ramfs none tartest/subdir || exit 77
+tar -C subdir -c -f - . | tar -C tartest/subdir -x -f -
+
+echo "# Level 1"
+cp archive-0.snar archive-1.snar
+tar $options --file archive-1.tar --listed-incremental=archive-1.snar .
+
+umount tartest/subdir
+)
+--- -	2015-11-24 15:39:15.259340210 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/89/stderr	2015-11-24 15:39:15.254164366 +0800
+@@ -1,4 +1,4 @@
+ tar: .: Directory is new
+ tar: ./subdir: Directory is new
+-tar: ./subdir: directory is on a different filesystem; not dumped
++tar: ./subdir: Directory has been renamed
+ 
+--- -	2015-11-24 15:39:15.262441565 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/89/stdout	2015-11-24 15:39:15.254164366 +0800
+@@ -7,4 +7,5 @@
+ # Level 1
+ ./
+ ./subdir/
++./subdir/subdir-file
+ 
+89. listed05.at:33: 89. --listed-incremental and remounted directories (listed05.at:33): expected failure (listed05.at:36)

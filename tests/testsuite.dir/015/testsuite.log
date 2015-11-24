@@ -1,0 +1,37 @@
+#                             -*- compilation -*-
+15. T-empty.at:26: testing empty entries ...
+./T-empty.at:36:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+
+genfile --file jeden
+genfile --file dwa
+genfile --file trzy
+
+tar cfvT archive ../file-list
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/15/stderr	2015-11-24 15:38:33.550165812 +0800
+@@ -0,0 +1,7 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/15/test-source: line 49: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/15/test-source: line 50: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/15/test-source: line 51: genfile: command not found
++tar: jeden: Cannot stat: No such file or directory
++tar: dwa: Cannot stat: No such file or directory
++tar: trzy: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:33.556539051 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/15/stdout	2015-11-24 15:38:33.550165812 +0800
+@@ -1,4 +1 @@
+-jeden
+-dwa
+-trzy
+ 
+./T-empty.at:36: exit code was 2, expected 0
+15. T-empty.at:26: 15. empty entries (T-empty.at:26): expected failure (T-empty.at:36)

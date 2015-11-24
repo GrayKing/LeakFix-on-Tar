@@ -1,0 +1,187 @@
+#                             -*- compilation -*-
+91. incr04.at:29: testing proper icontents initialization ...
+./incr04.at:34:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+install-sh -d a/b >/dev/null  || exit 77
+awk 'BEGIN {
+  for (i=1;i<=142;i++)
+    printf("a/b/one_31_chars_long_file_name_%03d\n", i);
+  }' < /dev/null | genfile --files-from -
+
+sleep 1
+
+echo "Initial dump"
+tar cvf a0.tar -g a.sna a
+mv a/b a/c
+echo "Incremental dump"
+tar cvf a1.tar -g a.sna a
+)
+--- -	2015-11-24 15:39:17.439763854 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/91/stderr	2015-11-24 15:39:17.434164290 +0800
+@@ -1,4 +1,5 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/91/test-source: line 55: genfile: command not found
+ tar: a: Directory is new
+ tar: a/b: Directory is new
+-tar: a/c: Directory has been renamed from 'a/b'
++tar: a/c: Directory has been renamed from `a/b'
+ 
+--- -	2015-11-24 15:39:17.442289172 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/91/stdout	2015-11-24 15:39:17.438164290 +0800
+@@ -1,148 +1,6 @@
+ Initial dump
+ a/
+ a/b/
+-a/b/one_31_chars_long_file_name_001
+-a/b/one_31_chars_long_file_name_002
+-a/b/one_31_chars_long_file_name_003
+-a/b/one_31_chars_long_file_name_004
+-a/b/one_31_chars_long_file_name_005
+-a/b/one_31_chars_long_file_name_006
+-a/b/one_31_chars_long_file_name_007
+-a/b/one_31_chars_long_file_name_008
+-a/b/one_31_chars_long_file_name_009
+-a/b/one_31_chars_long_file_name_010
+-a/b/one_31_chars_long_file_name_011
+-a/b/one_31_chars_long_file_name_012
+-a/b/one_31_chars_long_file_name_013
+-a/b/one_31_chars_long_file_name_014
+-a/b/one_31_chars_long_file_name_015
+-a/b/one_31_chars_long_file_name_016
+-a/b/one_31_chars_long_file_name_017
+-a/b/one_31_chars_long_file_name_018
+-a/b/one_31_chars_long_file_name_019
+-a/b/one_31_chars_long_file_name_020
+-a/b/one_31_chars_long_file_name_021
+-a/b/one_31_chars_long_file_name_022
+-a/b/one_31_chars_long_file_name_023
+-a/b/one_31_chars_long_file_name_024
+-a/b/one_31_chars_long_file_name_025
+-a/b/one_31_chars_long_file_name_026
+-a/b/one_31_chars_long_file_name_027
+-a/b/one_31_chars_long_file_name_028
+-a/b/one_31_chars_long_file_name_029
+-a/b/one_31_chars_long_file_name_030
+-a/b/one_31_chars_long_file_name_031
+-a/b/one_31_chars_long_file_name_032
+-a/b/one_31_chars_long_file_name_033
+-a/b/one_31_chars_long_file_name_034
+-a/b/one_31_chars_long_file_name_035
+-a/b/one_31_chars_long_file_name_036
+-a/b/one_31_chars_long_file_name_037
+-a/b/one_31_chars_long_file_name_038
+-a/b/one_31_chars_long_file_name_039
+-a/b/one_31_chars_long_file_name_040
+-a/b/one_31_chars_long_file_name_041
+-a/b/one_31_chars_long_file_name_042
+-a/b/one_31_chars_long_file_name_043
+-a/b/one_31_chars_long_file_name_044
+-a/b/one_31_chars_long_file_name_045
+-a/b/one_31_chars_long_file_name_046
+-a/b/one_31_chars_long_file_name_047
+-a/b/one_31_chars_long_file_name_048
+-a/b/one_31_chars_long_file_name_049
+-a/b/one_31_chars_long_file_name_050
+-a/b/one_31_chars_long_file_name_051
+-a/b/one_31_chars_long_file_name_052
+-a/b/one_31_chars_long_file_name_053
+-a/b/one_31_chars_long_file_name_054
+-a/b/one_31_chars_long_file_name_055
+-a/b/one_31_chars_long_file_name_056
+-a/b/one_31_chars_long_file_name_057
+-a/b/one_31_chars_long_file_name_058
+-a/b/one_31_chars_long_file_name_059
+-a/b/one_31_chars_long_file_name_060
+-a/b/one_31_chars_long_file_name_061
+-a/b/one_31_chars_long_file_name_062
+-a/b/one_31_chars_long_file_name_063
+-a/b/one_31_chars_long_file_name_064
+-a/b/one_31_chars_long_file_name_065
+-a/b/one_31_chars_long_file_name_066
+-a/b/one_31_chars_long_file_name_067
+-a/b/one_31_chars_long_file_name_068
+-a/b/one_31_chars_long_file_name_069
+-a/b/one_31_chars_long_file_name_070
+-a/b/one_31_chars_long_file_name_071
+-a/b/one_31_chars_long_file_name_072
+-a/b/one_31_chars_long_file_name_073
+-a/b/one_31_chars_long_file_name_074
+-a/b/one_31_chars_long_file_name_075
+-a/b/one_31_chars_long_file_name_076
+-a/b/one_31_chars_long_file_name_077
+-a/b/one_31_chars_long_file_name_078
+-a/b/one_31_chars_long_file_name_079
+-a/b/one_31_chars_long_file_name_080
+-a/b/one_31_chars_long_file_name_081
+-a/b/one_31_chars_long_file_name_082
+-a/b/one_31_chars_long_file_name_083
+-a/b/one_31_chars_long_file_name_084
+-a/b/one_31_chars_long_file_name_085
+-a/b/one_31_chars_long_file_name_086
+-a/b/one_31_chars_long_file_name_087
+-a/b/one_31_chars_long_file_name_088
+-a/b/one_31_chars_long_file_name_089
+-a/b/one_31_chars_long_file_name_090
+-a/b/one_31_chars_long_file_name_091
+-a/b/one_31_chars_long_file_name_092
+-a/b/one_31_chars_long_file_name_093
+-a/b/one_31_chars_long_file_name_094
+-a/b/one_31_chars_long_file_name_095
+-a/b/one_31_chars_long_file_name_096
+-a/b/one_31_chars_long_file_name_097
+-a/b/one_31_chars_long_file_name_098
+-a/b/one_31_chars_long_file_name_099
+-a/b/one_31_chars_long_file_name_100
+-a/b/one_31_chars_long_file_name_101
+-a/b/one_31_chars_long_file_name_102
+-a/b/one_31_chars_long_file_name_103
+-a/b/one_31_chars_long_file_name_104
+-a/b/one_31_chars_long_file_name_105
+-a/b/one_31_chars_long_file_name_106
+-a/b/one_31_chars_long_file_name_107
+-a/b/one_31_chars_long_file_name_108
+-a/b/one_31_chars_long_file_name_109
+-a/b/one_31_chars_long_file_name_110
+-a/b/one_31_chars_long_file_name_111
+-a/b/one_31_chars_long_file_name_112
+-a/b/one_31_chars_long_file_name_113
+-a/b/one_31_chars_long_file_name_114
+-a/b/one_31_chars_long_file_name_115
+-a/b/one_31_chars_long_file_name_116
+-a/b/one_31_chars_long_file_name_117
+-a/b/one_31_chars_long_file_name_118
+-a/b/one_31_chars_long_file_name_119
+-a/b/one_31_chars_long_file_name_120
+-a/b/one_31_chars_long_file_name_121
+-a/b/one_31_chars_long_file_name_122
+-a/b/one_31_chars_long_file_name_123
+-a/b/one_31_chars_long_file_name_124
+-a/b/one_31_chars_long_file_name_125
+-a/b/one_31_chars_long_file_name_126
+-a/b/one_31_chars_long_file_name_127
+-a/b/one_31_chars_long_file_name_128
+-a/b/one_31_chars_long_file_name_129
+-a/b/one_31_chars_long_file_name_130
+-a/b/one_31_chars_long_file_name_131
+-a/b/one_31_chars_long_file_name_132
+-a/b/one_31_chars_long_file_name_133
+-a/b/one_31_chars_long_file_name_134
+-a/b/one_31_chars_long_file_name_135
+-a/b/one_31_chars_long_file_name_136
+-a/b/one_31_chars_long_file_name_137
+-a/b/one_31_chars_long_file_name_138
+-a/b/one_31_chars_long_file_name_139
+-a/b/one_31_chars_long_file_name_140
+-a/b/one_31_chars_long_file_name_141
+-a/b/one_31_chars_long_file_name_142
+ Incremental dump
+ a/
+ a/c/
+91. incr04.at:29: 91. proper icontents initialization (incr04.at:29): expected failure (incr04.at:34)

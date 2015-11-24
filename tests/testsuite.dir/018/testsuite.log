@@ -1,0 +1,57 @@
+#                             -*- compilation -*-
+18. T-nonl.at:27: testing entries with missing newlines ...
+./T-nonl.at:30:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --length=0 --file empty
+$as_echo_n c > 1.nonl
+echo d > 2.nonl
+$as_echo_n e >> 2.nonl
+touch a b c d e
+cat >filelist <<'_ATEOF'
+a
+b
+_ATEOF
+
+
+tar cf archive -T empty -T 1.nonl -T 2.nonl -T filelist
+tar tf archive
+echo ==
+tar cf archive -T 2.nonl -T empty -T filelist -T 1.nonl
+tar tf archive
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/18/stderr	2015-11-24 15:38:33.766165804 +0800
+@@ -0,0 +1,9 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/18/test-source: line 50: genfile: command not found
++tar: empty: Cannot stat: No such file or directory
++tar: Error is not recoverable: exiting now
++tar: archive: Cannot open: No such file or directory
++tar: Error is not recoverable: exiting now
++tar: empty: Cannot stat: No such file or directory
++tar: Error is not recoverable: exiting now
++tar: archive: Cannot open: No such file or directory
++tar: Error is not recoverable: exiting now
+--- -	2015-11-24 15:38:33.777817463 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/18/stdout	2015-11-24 15:38:33.766165804 +0800
+@@ -1,12 +1,2 @@
+-c
+-d
+-e
+-a
+-b
+ ==
+-d
+-e
+-a
+-b
+-c
+ 
+./T-nonl.at:30: exit code was 2, expected 0
+18. T-nonl.at:27: 18. entries with missing newlines (T-nonl.at:27): expected failure (T-nonl.at:30)

@@ -1,0 +1,38 @@
+#                             -*- compilation -*-
+107. link02.at:32: testing preserve hard links with --remove-files ...
+./link02.at:35:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile -l 64 -f file1
+ln file1 file2
+ln file2 file3
+ln file3 file4
+tar -c -f archive --remove-files file1 file2 file3 file4
+tar tfv archive | sed -n 's/.*file[2-4] link to //p'
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/107/stderr	2015-11-24 15:39:20.566164182 +0800
+@@ -0,0 +1,9 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/107/test-source: line 40: genfile: command not found
++ln: accessing 'file1': No such file or directory
++ln: accessing 'file2': No such file or directory
++ln: accessing 'file3': No such file or directory
++tar: file1: Cannot stat: No such file or directory
++tar: file2: Cannot stat: No such file or directory
++tar: file3: Cannot stat: No such file or directory
++tar: file4: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:39:20.577649547 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/107/stdout	2015-11-24 15:39:20.570164182 +0800
+@@ -1,4 +1 @@
+-file1
+-file1
+-file1
+ 
+107. link02.at:32: 107. preserve hard links with --remove-files (link02.at:32): expected failure (link02.at:35)

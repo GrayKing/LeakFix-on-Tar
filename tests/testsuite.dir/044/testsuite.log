@@ -1,0 +1,36 @@
+#                             -*- compilation -*-
+44. exclude09.at:37: testing --exclude-tag option and --listed-incremental ...
+./exclude09.at:40:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkexcltest etest
+tar -c -f etest.tar --exclude-tag=excludeme --listed=snar -v etest | sort
+)
+--- -	2015-11-24 15:38:41.843921123 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/44/stderr	2015-11-24 15:38:41.838165524 +0800
+@@ -1,4 +1,6 @@
++./atlocal: line 55: genfile: command not found
++./atlocal: line 56: genfile: command not found
++./atlocal: line 57: genfile: command not found
+ tar: etest: Directory is new
+ tar: etest/subdir: Directory is new
+-tar: etest/subdir: contains a cache directory tag excludeme; contents not dumped
+ 
+--- -	2015-11-24 15:38:41.845829592 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/44/stdout	2015-11-24 15:38:41.838165524 +0800
+@@ -1,5 +1,3 @@
+ etest/
+ etest/subdir/
+-etest/subdir/excludeme
+-etest/top-level-file
+ 
+44. exclude09.at:37: 44. --exclude-tag option and --listed-incremental (exclude09.at:37): expected failure (exclude09.at:40)

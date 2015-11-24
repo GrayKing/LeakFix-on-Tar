@@ -1,0 +1,81 @@
+#                             -*- compilation -*-
+99. rename01.at:24: testing renamed dirs in incrementals ...
+./rename01.at:27:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+mkdir foo
+genfile --file foo/file1
+genfile --file foo/file2
+mkdir foo/bar
+genfile --file foo/bar/file
+
+echo "Creating base archive"
+tar -g incr -cf arch.1 -v foo
+
+mv foo/bar foo/baz
+
+echo "Creating incremental archive"
+tar -g incr -cf arch.2 -v foo
+
+mv foo old
+
+tar xfg arch.1 /dev/null
+
+echo "Begin directory listing 1"
+find foo | sort
+echo "End directory listing 1"
+
+tar xfg arch.2 /dev/null
+echo Begin directory listing 2
+find foo | sort
+echo End directory listing 2
+)
+--- -	2015-11-24 15:39:18.026047700 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/99/stderr	2015-11-24 15:39:18.022164270 +0800
+@@ -1,4 +1,7 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/99/test-source: line 69: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/99/test-source: line 70: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/99/test-source: line 72: genfile: command not found
+ tar: foo: Directory is new
+ tar: foo/bar: Directory is new
+-tar: foo/baz: Directory has been renamed from 'foo/bar'
++tar: foo/baz: Directory has been renamed from `foo/bar'
+ 
+--- -	2015-11-24 15:39:18.027889929 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/99/stdout	2015-11-24 15:39:18.022164270 +0800
+@@ -1,24 +1,15 @@
+ Creating base archive
+ foo/
+ foo/bar/
+-foo/file1
+-foo/file2
+-foo/bar/file
+ Creating incremental archive
+ foo/
+ foo/baz/
+ Begin directory listing 1
+ foo
+ foo/bar
+-foo/bar/file
+-foo/file1
+-foo/file2
+ End directory listing 1
+ Begin directory listing 2
+ foo
+ foo/baz
+-foo/baz/file
+-foo/file1
+-foo/file2
+ End directory listing 2
+ 
+99. rename01.at:24: 99. renamed dirs in incrementals (rename01.at:24): expected failure (rename01.at:27)

@@ -1,0 +1,14 @@
+stripslash.o: stripslash.c ../config.h dirname.h \
+  /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdbool.h \
+  /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stddef.h \
+  dosname.h
+
+../config.h:
+
+dirname.h:
+
+/mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdbool.h:
+
+/mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stddef.h:
+
+dosname.h:

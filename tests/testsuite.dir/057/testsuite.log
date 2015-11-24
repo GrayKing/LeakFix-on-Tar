@@ -1,0 +1,73 @@
+#                             -*- compilation -*-
+57. extrac01.at:23: testing extract over an existing directory ...
+./extrac01.at:26:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+touch directory/file
+tar cf archive directory || exit 1
+tar xf archive --warning=no-timestamp || exit 1
+)
+./extrac01.at:26:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+touch directory/file
+tar cf archive directory || exit 1
+tar xf archive --warning=no-timestamp || exit 1
+)
+./extrac01.at:26:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+touch directory/file
+tar cf archive directory || exit 1
+tar xf archive --warning=no-timestamp || exit 1
+)
+./extrac01.at:26:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+touch directory/file
+tar cf archive directory || exit 1
+tar xf archive --warning=no-timestamp || exit 1
+)
+./extrac01.at:26:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+touch directory/file
+tar cf archive directory || exit 1
+tar xf archive --warning=no-timestamp || exit 1
+)
+57. extrac01.at:23: 57. extract over an existing directory (extrac01.at:23): UNEXPECTED PASS     (0m0.000s 0m0.004s)

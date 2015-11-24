@@ -1,0 +1,37 @@
+#                             -*- compilation -*-
+122. multiv06.at:27: testing Multivolumes with L=record_size ...
+./multiv06.at:30:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+exec <&-
+decho Creating file
+genfile --length 20139 --file file
+decho Creating archive
+tar -c -M -L10 -b20 -farc.1 -farc.2 -farc.3 file
+decho Testing archive
+tar -t -M -farc.1 -farc.2 -farc.3)
+--- -	2015-11-24 15:39:26.043355407 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/122/stderr	2015-11-24 15:39:26.038163992 +0800
+@@ -1,4 +1,7 @@
+ Creating file
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/122/test-source: line 42: genfile: command not found
+ Creating archive
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ Testing archive
+ 
+--- -	2015-11-24 15:39:26.045155321 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/122/stdout	2015-11-24 15:39:26.038163992 +0800
+@@ -1,5 +1,4 @@
+ Creating file
+ Creating archive
+ Testing archive
+-file
+ 
+122. multiv06.at:27: 122. Multivolumes with L=record_size (multiv06.at:27): expected failure (multiv06.at:30)

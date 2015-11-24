@@ -1,0 +1,56 @@
+#                             -*- compilation -*-
+62. extrac06.at:34: testing mode of extracted directories ...
+./extrac06.at:37:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+# Force umask
+umask 022
+
+# Make sure user's umask is honored, even if we are superuser
+TAR_OPTIONS="$TAR_OPTIONS --no-same-permissions"
+
+# Create a directory
+mkdir directory
+chmod 777 directory
+genfile --stat=mode:777 directory
+
+# Archive it
+tar cf arc directory
+
+# Change its permissions ...
+chmod 755 directory
+genfile --stat=mode:777 directory
+
+# ... and attempt to restore it twice
+tar xf arc directory --warning=no-timestamp
+genfile --stat=mode:777 directory
+
+tar xf arc directory --warning=no-timestamp
+genfile --stat=mode:777 directory
+
+# After both restores, the directory mode should be 755
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/62/stderr	2015-11-24 15:38:43.242165476 +0800
+@@ -0,0 +1,4 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/62/test-source: line 71: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/62/test-source: line 78: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/62/test-source: line 82: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/62/test-source: line 85: genfile: command not found
+--- -	2015-11-24 15:38:43.252716933 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/62/stdout	2015-11-24 15:38:43.246165476 +0800
+@@ -1,5 +1 @@
+-777
+-755
+-755
+-755
+ 
+./extrac06.at:37: exit code was 127, expected 0
+62. extrac06.at:34: 62. mode of extracted directories (extrac06.at:34): expected failure (extrac06.at:37)

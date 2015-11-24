@@ -1,0 +1,46 @@
+#                             -*- compilation -*-
+13. T-rec.at:21: testing recursive file lists ...
+./T-rec.at:24:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+>file1
+>file2
+cat >F1 <<'_ATEOF'
+file1
+-T F2
+_ATEOF
+
+cat >F2 <<'_ATEOF'
+file2
+-T F1
+_ATEOF
+
+tar cf archive -T F1
+echo $?
+tar tf archive
+)
+--- -	2015-11-24 15:38:33.428755098 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/13/stderr	2015-11-24 15:38:33.422165816 +0800
+@@ -1,3 +1,5 @@
+-tar: F1: file list requested from F2 already read from command line
+-tar: Exiting with failure status due to previous errors
++tar:  F2: Cannot stat: No such file or directory
++tar: Error is not recoverable: exiting now
++tar: archive: Cannot open: No such file or directory
++tar: Error is not recoverable: exiting now
+ 
+--- -	2015-11-24 15:38:33.432125552 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/13/stdout	2015-11-24 15:38:33.426165816 +0800
+@@ -1,4 +1,2 @@
+ 2
+-file1
+-file2
+ 
+./T-rec.at:24: exit code was 2, expected 0
+13. T-rec.at:21: 13. recursive file lists (T-rec.at:21): expected failure (T-rec.at:24)

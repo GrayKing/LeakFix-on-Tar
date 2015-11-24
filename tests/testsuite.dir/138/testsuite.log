@@ -1,0 +1,44 @@
+#                             -*- compilation -*-
+138. volume.at:23: testing volume ...
+./volume.at:26:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+tar -cf archive -V label -T /dev/null || exit 1
+
+tar xfV archive label || exit 1
+tar xfV archive 'la?el' || exit 1
+tar xfV archive 'l*l' || exit 1
+
+echo 1>&2 -----
+tar xfV archive lab
+test $? = 2 || exit 1
+echo 1>&2 -----
+tar xfV archive bel
+test $? = 2 || exit 1
+echo 1>&2 -----
+tar xfV archive babel
+test $? = 2
+)
+--- -	2015-11-24 15:39:30.590685967 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/138/stderr	2015-11-24 15:39:30.586163834 +0800
+@@ -1,10 +1,10 @@
+ -----
+-tar: Volume 'label' does not match 'lab'
++tar: Volume `label' does not match `lab'
+ tar: Error is not recoverable: exiting now
+ -----
+-tar: Volume 'label' does not match 'bel'
++tar: Volume `label' does not match `bel'
+ tar: Error is not recoverable: exiting now
+ -----
+-tar: Volume 'label' does not match 'babel'
++tar: Volume `label' does not match `babel'
+ tar: Error is not recoverable: exiting now
+ 
+138. volume.at:23: 138. volume (volume.at:23): expected failure (volume.at:26)

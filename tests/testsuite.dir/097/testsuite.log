@@ -1,0 +1,34 @@
+#                             -*- compilation -*-
+97. filerem01.at:36: testing file removed as we read it (ca. 22 seconds) ...
+./filerem01.at:39:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir dir
+mkdir dir/sub
+genfile --file dir/file1
+genfile --file dir/sub/file2
+
+genfile --run --checkpoint=3 --unlink dir/file1 -- \
+       tar --blocking-factor=1 --checkpoint=1 --checkpoint-action='sleep=1' \
+       --checkpoint-action='echo' -c -f archive.tar \
+       --listed-incremental db -v dir >/dev/null
+)
+--- -	2015-11-24 15:39:17.869005029 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/97/stderr	2015-11-24 15:39:17.862164275 +0800
+@@ -1,4 +1,4 @@
+-tar: dir: Directory is new
+-tar: dir/sub: Directory is new
+-tar: dir/file1: File removed before we read it
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/97/test-source: line 45: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/97/test-source: line 46: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/97/test-source: line 48: genfile: command not found
+ 
+stdout:
+./filerem01.at:39: exit code was 127, expected 1
+97. filerem01.at:36: 97. file removed as we read it (ca. 22 seconds) (filerem01.at:36): expected failure (filerem01.at:39)

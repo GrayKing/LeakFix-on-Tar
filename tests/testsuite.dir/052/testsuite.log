@@ -1,0 +1,32 @@
+#                             -*- compilation -*-
+52. delete01.at:23: testing deleting a member after a big one ...
+./delete01.at:26:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile -l 50000 --file file1
+genfile -l 1024 --file file2
+tar cf archive file1 file2
+tar f archive --delete file2
+tar tf archive)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/52/stderr	2015-11-24 15:38:42.306165508 +0800
+@@ -0,0 +1,7 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/52/test-source: line 38: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/52/test-source: line 39: genfile: command not found
++tar: file1: Cannot stat: No such file or directory
++tar: file2: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: file2: Not found in archive
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:42.313670436 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/52/stdout	2015-11-24 15:38:42.310165508 +0800
+@@ -1,2 +1 @@
+-file1
+ 
+52. delete01.at:23: 52. deleting a member after a big one (delete01.at:23): expected failure (delete01.at:26)

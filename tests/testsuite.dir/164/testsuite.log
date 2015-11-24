@@ -1,0 +1,19 @@
+#                             -*- compilation -*-
+164. remfiles09a.at:25: testing remove-files on full directory in -c/non-incr. mode ...
+./remfiles09a.at:28:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir foo
+echo foo/file > foo/file
+decho A
+tar -cvf foo.tar --remove-files foo
+decho B
+find .
+)
+164. remfiles09a.at:25: 164. remove-files on full directory in -c/non-incr. mode (remfiles09a.at:25): UNEXPECTED PASS     (0m0.000s 0m0.000s)

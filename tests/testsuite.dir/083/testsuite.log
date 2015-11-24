@@ -1,0 +1,34 @@
+#                             -*- compilation -*-
+83. incr01.at:27: testing restore broken symlinks from incremental ...
+./incr01.at:30:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+$as_ln_s foo directory/bar
+
+tar -cf archive.0 -g db directory
+rm directory/bar
+tar -cf archive.1 -g db directory
+
+mv directory orig
+
+tar xvfg archive.0 /dev/null --warning=no-timestamp
+echo separator
+tar xvfg archive.1 /dev/null --warning=no-timestamp
+)
+--- -	2015-11-24 15:38:53.405274624 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/83/stdout	2015-11-24 15:38:53.398165124 +0800
+@@ -2,5 +2,5 @@
+ directory/bar
+ separator
+ directory/
+-tar: Deleting 'directory/bar'
++tar: Deleting `directory/bar'
+ 
+83. incr01.at:27: 83. restore broken symlinks from incremental (incr01.at:27): expected failure (incr01.at:30)

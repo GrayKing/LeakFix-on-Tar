@@ -1,0 +1,47 @@
+#                             -*- compilation -*-
+27. same-order02.at:25: testing multiple -C options ...
+./same-order02.at:28:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile -l 1024 -f file1
+genfile -l 1024 -f file2
+tar cf archive file1 file2
+
+mkdir en
+mkdir to
+
+HERE=`pwd`
+tar -xf archive --same-order --warning=no-timestamp \
+  -C $HERE/en file1 \
+  -C $HERE/to file2 || exit 1
+
+ls en
+echo separator
+ls to
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/27/stderr	2015-11-24 15:38:34.526165778 +0800
+@@ -0,0 +1,8 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/27/test-source: line 49: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/27/test-source: line 50: genfile: command not found
++tar: file1: Cannot stat: No such file or directory
++tar: file2: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: file1: Not found in archive
++tar: file2: Not found in archive
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:34.536487227 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/27/stdout	2015-11-24 15:38:34.530165778 +0800
+@@ -1,4 +1 @@
+-file1
+-separator
+-file2
+ 
+./same-order02.at:28: exit code was 1, expected 0
+27. same-order02.at:25: 27. multiple -C options (same-order02.at:25): expected failure (same-order02.at:28)

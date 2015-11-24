@@ -1,0 +1,40 @@
+#                             -*- compilation -*-
+32. append04.at:29: testing append with verify ...
+./append04.at:32:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+# Create two empty files:
+touch file1 file2
+
+# Create an archive:
+tar cpfW archive.tar file1 file2
+
+# Verify created archive by listing its content:
+tar -tf archive.tar
+echo ==
+# Create another empty file:
+touch file3
+
+# Append it to the already created archive:
+tar rpfW archive.tar file3
+
+# Verify content of the new archive:
+tar -tf archive.tar
+)
+--- -	2015-11-24 15:38:34.921638993 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/32/stdout	2015-11-24 15:38:34.914165764 +0800
+@@ -1,7 +1,5 @@
+ file1
+ file2
+ ==
+-file1
+-file2
+ file3
+ 
+32. append04.at:29: 32. append with verify (append04.at:29): expected failure (append04.at:32)

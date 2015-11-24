@@ -1,0 +1,60 @@
+#                             -*- compilation -*-
+96. incr09.at:26: testing incremental with alternating -C ...
+./incr09.at:29:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir foo bar middle
+echo foo/foo_file > foo/foo_file
+echo bar/bar_file > bar/bar_file
+echo middle/file > middle/middle_file
+decho A
+tar -cvf foo.tar --incremental -C foo . -C `pwd` middle  -C bar .
+
+rm foo.tar
+>toplevel_file
+decho B
+tar -cvf foo.tar --incremental -C foo . -C `pwd` toplevel_file  -C bar .
+)
+--- -	2015-11-24 15:39:17.812366639 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/96/stderr	2015-11-24 15:39:17.798164278 +0800
+@@ -1,8 +1,10 @@
+ A
+ tar: .: Directory is new
+ tar: middle: Directory is new
+-tar: .: Directory is new
++tar: .: Directory has been renamed
++tar: ./bar_file: File removed before we read it
+ B
+ tar: .: Directory is new
+-tar: .: Directory is new
++tar: .: Directory has been renamed
++tar: ./bar_file: File removed before we read it
+ 
+--- -	2015-11-24 15:39:17.814797536 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/96/stdout	2015-11-24 15:39:17.810164277 +0800
+@@ -1,14 +1,8 @@
+ A
+ ./
+-./
+ middle/
+-./bar_file
+-./foo_file
+ middle/middle_file
+ B
+ ./
+-./
+ toplevel_file
+-./bar_file
+-./foo_file
+ 
+./incr09.at:29: exit code was 1, expected 0
+96. incr09.at:26: 96. incremental with alternating -C (incr09.at:26): expected failure (incr09.at:29)

@@ -1,0 +1,10 @@
+#                             -*- compilation -*-
+1. version.at:19: testing tar version ...
+./version.at:21: tar --version | sed 1q
+--- -	2015-11-24 15:38:31.008576136 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/1/stdout	2015-11-24 15:38:31.002165900 +0800
+@@ -1,2 +1,2 @@
+-tar (GNU tar) 1.28
++tar (GNU tar) 1.26
+ 
+1. version.at:19: 1. tar version (version.at:19): FAILED (version.at:21)

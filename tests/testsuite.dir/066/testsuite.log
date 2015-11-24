@@ -1,0 +1,21 @@
+#                             -*- compilation -*-
+66. extrac10.at:29: testing -C and delayed setting of metadata ...
+./extrac10.at:32:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir d x x/y
+echo foo >d/d1
+echo bar >e
+
+tar -cf archive.tar d e &&
+tar -xf archive.tar -C x d -C y e &&
+diff -r d x/d &&
+diff e x/y/e
+)
+66. extrac10.at:29: 66. -C and delayed setting of metadata (extrac10.at:29): UNEXPECTED PASS     (0m0.000s 0m0.000s)

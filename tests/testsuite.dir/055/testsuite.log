@@ -1,0 +1,65 @@
+#                             -*- compilation -*-
+55. delete04.at:23: testing deleting a large last member ...
+./delete04.at:26:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile -l      3 -f file1
+genfile -l      5 -f file2
+genfile -l      3 -f file3
+genfile -l      6 -f file4
+genfile -l     24 -f file5
+genfile -l     13 -f file6
+genfile -l   1385 -f file7
+genfile -l     30 -f file8
+genfile -l     10 -f file9
+genfile -l 256000 -f file10
+tar cf archive file1 file2 file3 file4 file5 file6 file7 file8 file9 file10
+tar f archive --delete file10
+tar tf archive
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/stderr	2015-11-24 15:38:42.574165499 +0800
+@@ -0,0 +1,23 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 47: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 48: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 49: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 50: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 51: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 52: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 53: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 54: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 55: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/test-source: line 56: genfile: command not found
++tar: file1: Cannot stat: No such file or directory
++tar: file2: Cannot stat: No such file or directory
++tar: file3: Cannot stat: No such file or directory
++tar: file4: Cannot stat: No such file or directory
++tar: file5: Cannot stat: No such file or directory
++tar: file6: Cannot stat: No such file or directory
++tar: file7: Cannot stat: No such file or directory
++tar: file8: Cannot stat: No such file or directory
++tar: file9: Cannot stat: No such file or directory
++tar: file10: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: file10: Not found in archive
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:42.581811558 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/55/stdout	2015-11-24 15:38:42.578165499 +0800
+@@ -1,10 +1 @@
+-file1
+-file2
+-file3
+-file4
+-file5
+-file6
+-file7
+-file8
+-file9
+ 
+55. delete04.at:23: 55. deleting a large last member (delete04.at:23): expected failure (delete04.at:26)

@@ -1,0 +1,61 @@
+#                             -*- compilation -*-
+95. incr08.at:38: testing filename normalization ...
+./incr08.at:41:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir tartest
+cd tartest
+mkdir foo
+mkdir foo/subdir
+mkdir foo/subdir/dir1
+mkdir subdir
+mkdir subdir/dir2
+decho A
+find .|sort
+
+decho B
+DIR=`pwd`
+tar -cvf ../foo.tar --listed-incremental=../foo.snar -C foo . $DIR 2>../err |\
+  sed "s|$DIR|ABSPATH|"
+sed "s|$DIR|ABSPATH|" ../err >&2
+)
+--- -	2015-11-24 15:39:17.725416458 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/95/stderr	2015-11-24 15:39:17.718164280 +0800
+@@ -3,8 +3,8 @@
+ tar: .: Directory is new
+ tar: ./subdir: Directory is new
+ tar: ./subdir/dir1: Directory is new
+-tar: ABSPATH: Directory is new
+-tar: ABSPATH/subdir: Directory is new
+-tar: ABSPATH/subdir/dir2: Directory is new
++tar: ABSPATH: Directory has been renamed
++tar: ABSPATH/foo: Directory is new
++tar: ABSPATH/foo/subdir: Directory has been renamed from `./subdir'
+ tar: Removing leading `/' from member names
+ 
+--- -	2015-11-24 15:39:17.730646102 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/95/stdout	2015-11-24 15:39:17.726164280 +0800
+@@ -6,10 +6,10 @@
+ ./subdir
+ ./subdir/dir2
+ B
+-./
+-./subdir/
+ ./subdir/dir1/
+ ABSPATH/
++ABSPATH/foo/
++ABSPATH/foo/subdir/
++ABSPATH/foo/subdir/dir1/
+ ABSPATH/subdir/
+-ABSPATH/subdir/dir2/
+ 
+95. incr08.at:38: 95. filename normalization (incr08.at:38): expected failure (incr08.at:41)

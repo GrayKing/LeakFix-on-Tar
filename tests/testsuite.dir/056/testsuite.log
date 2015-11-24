@@ -1,0 +1,38 @@
+#                             -*- compilation -*-
+56. delete05.at:27: testing deleting non-existing member ...
+./delete05.at:30:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile -l 1024 -f en
+genfile -l 1024 -f to
+
+tar cf archive en to
+# Make sure we don't use bogus blocking factor.
+# GNU tar up to and including 1.14.91 produced an empty archive this way:
+tar --file archive --blocking-factor=20 --delete tre
+tar tf archive
+)
+--- -	2015-11-24 15:38:42.636862470 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/56/stderr	2015-11-24 15:38:42.630165497 +0800
+@@ -1,3 +1,8 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/56/test-source: line 42: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/56/test-source: line 43: genfile: command not found
++tar: en: Cannot stat: No such file or directory
++tar: to: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ tar: tre: Not found in archive
+ tar: Exiting with failure status due to previous errors
+ 
+--- -	2015-11-24 15:38:42.639012745 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/56/stdout	2015-11-24 15:38:42.634165497 +0800
+@@ -1,3 +1 @@
+-en
+-to
+ 
+56. delete05.at:27: 56. deleting non-existing member (delete05.at:27): expected failure (delete05.at:30)

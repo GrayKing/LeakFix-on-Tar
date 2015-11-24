@@ -1,0 +1,243 @@
+#                             -*- compilation -*-
+37. exclude02.at:19: testing exclude: anchoring ...
+./exclude02.at:22:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir
+touch file1.txt
+touch testdir/file1.txt
+touch testdir/file2
+
+tar cf archive --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive --no-anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 2"
+tar cf archive --anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 3"
+tar cf archive testdir file1.txt
+tar t "file1.txt" -f archive | sort
+
+echo "SUB 4"
+tar t --no-anchored "file1.txt" -f archive | sort
+
+echo "SUB 5"
+tar t --anchored "file1.txt" -f archive | sort
+
+rm -rf testdir file1.txt
+
+)
+./exclude02.at:22:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir
+touch file1.txt
+touch testdir/file1.txt
+touch testdir/file2
+
+tar cf archive --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive --no-anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 2"
+tar cf archive --anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 3"
+tar cf archive testdir file1.txt
+tar t "file1.txt" -f archive | sort
+
+echo "SUB 4"
+tar t --no-anchored "file1.txt" -f archive | sort
+
+echo "SUB 5"
+tar t --anchored "file1.txt" -f archive | sort
+
+rm -rf testdir file1.txt
+
+)
+./exclude02.at:22:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir
+touch file1.txt
+touch testdir/file1.txt
+touch testdir/file2
+
+tar cf archive --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive --no-anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 2"
+tar cf archive --anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 3"
+tar cf archive testdir file1.txt
+tar t "file1.txt" -f archive | sort
+
+echo "SUB 4"
+tar t --no-anchored "file1.txt" -f archive | sort
+
+echo "SUB 5"
+tar t --anchored "file1.txt" -f archive | sort
+
+rm -rf testdir file1.txt
+
+)
+./exclude02.at:22:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir
+touch file1.txt
+touch testdir/file1.txt
+touch testdir/file2
+
+tar cf archive --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive --no-anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 2"
+tar cf archive --anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 3"
+tar cf archive testdir file1.txt
+tar t "file1.txt" -f archive | sort
+
+echo "SUB 4"
+tar t --no-anchored "file1.txt" -f archive | sort
+
+echo "SUB 5"
+tar t --anchored "file1.txt" -f archive | sort
+
+rm -rf testdir file1.txt
+
+)
+./exclude02.at:22:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir
+mkdir -p testdir
+touch file1.txt
+touch testdir/file1.txt
+touch testdir/file2
+
+tar cf archive --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 1"
+tar cf archive --no-anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 2"
+tar cf archive --anchored \
+               --exclude="file1.txt" \
+               testdir
+tar tf archive | sort
+
+echo "SUB 3"
+tar cf archive testdir file1.txt
+tar t "file1.txt" -f archive | sort
+
+echo "SUB 4"
+tar t --no-anchored "file1.txt" -f archive | sort
+
+echo "SUB 5"
+tar t --anchored "file1.txt" -f archive | sort
+
+rm -rf testdir file1.txt
+
+)
+37. exclude02.at:19: 37. exclude: anchoring (exclude02.at:19): UNEXPECTED PASS     (0m0.008s 0m0.036s)

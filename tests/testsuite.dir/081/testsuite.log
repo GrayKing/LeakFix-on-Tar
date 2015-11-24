@@ -1,0 +1,37 @@
+#                             -*- compilation -*-
+81. label05.at:24: testing label with non-create option ...
+./label05.at:27:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+exec <&-
+genfile --file file
+decho "# Create volume"
+tar -c -f archive file
+decho "# Update: wrong label"
+tar -rf archive --label='My volume' file; echo $?
+decho "# Update: right label"
+tar -rf archive file
+)
+--- -	2015-11-24 15:38:44.217441913 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/81/stderr	2015-11-24 15:38:44.210165442 +0800
+@@ -1,6 +1,11 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/81/test-source: line 43: genfile: command not found
+ # Create volume
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ # Update: wrong label
+-tar: Archive not labeled to match 'My volume'
++tar: Archive not labeled to match `My volume'
+ tar: Error is not recoverable: exiting now
+ # Update: right label
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ 
+./label05.at:27: exit code was 2, expected 0
+81. label05.at:24: 81. label with non-create option (label05.at:24): expected failure (label05.at:27)

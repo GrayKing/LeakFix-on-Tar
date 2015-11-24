@@ -1,0 +1,47 @@
+#                             -*- compilation -*-
+30. append02.at:54: testing append vs. create ...
+./append02.at:57:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --file file1
+genfile --file file2
+
+# Make sure file timestamps in the archive will not differ
+MTIME="--mtime=@0"
+
+# For PAX archives, we need to make sure extended header names are
+# reproducible and that their contents won't change with time
+if test $TEST_TAR_FORMAT = posix; then
+  TAR_OPTIONS="$TAR_OPTIONS --pax-option=exthdr.name=%d/PaxHeaders/%f,delete=mtime,delete=atime,delete=ctime"
+fi
+
+echo Creating archive.1
+tar $MTIME -cf archive.1 file1 file2
+
+echo Creating archive.2
+tar $MTIME -cf archive.2 -T /dev/null
+tar $MTIME -rf archive.2 file1
+tar $MTIME -rf archive.2 file2
+
+echo Comparing archives
+cmp archive.1 archive.2
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/30/stderr	2015-11-24 15:38:34.778165769 +0800
+@@ -0,0 +1,9 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/30/test-source: line 56: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/30/test-source: line 57: genfile: command not found
++tar: file1: Cannot stat: No such file or directory
++tar: file2: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: file1: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: file2: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+30. append02.at:54: 30. append vs. create (append02.at:54): expected failure (append02.at:57)

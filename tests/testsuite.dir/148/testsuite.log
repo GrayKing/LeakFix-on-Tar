@@ -1,0 +1,17 @@
+#                             -*- compilation -*-
+148. remfiles03.at:28: testing remove-files with symbolic links ...
+./remfiles03.at:31:
+mkdir a
+mkdir a/b
+ln -s b a/c || exit 77
+tar --remove-files -cf a.tar a
+genfile --stat a
+
+--- -	2015-11-24 15:39:30.924872733 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/148/stderr	2015-11-24 15:39:30.918163823 +0800
+@@ -1,2 +1,2 @@
+-genfile: stat(a) failed: No such file or directory
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/148/test-source: line 24: genfile: command not found
+ 
+./remfiles03.at:31: exit code was 127, expected 0
+148. remfiles03.at:28: 148. remove-files with symbolic links (remfiles03.at:28): FAILED (remfiles03.at:31)

@@ -1,0 +1,46 @@
+#                             -*- compilation -*-
+79. label03.at:27: testing test-label option ...
+./label03.at:30:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+exec <&-
+genfile --file file
+tar -c --label='iamalabel' --file iamanarchive file
+tar -c --file unlabeled.tar file
+decho "# Display label"
+tar --test-label --file=iamanarchive; echo $?
+decho "# Display label: unlabeled"
+tar --test-label --file=unlabeled.tar; echo $?
+decho "# Test label: success"
+tar --test-label --file=iamanarchive 'iamalabel'; echo $?
+decho "# Test label: failure"
+tar --test-label --file=iamanarchive 'amalabel'; echo $?
+decho "# Test label: unlabeled"
+tar --test-label --file=unlabeled.tar 'amalabel'; echo $?
+decho "# Test label, verbose: success"
+tar --test-label --verbose --file=iamanarchive 'iamalabel'; echo $?
+decho "# Test label, verbose: failure"
+tar --test-label --verbose --file=iamanarchive 'amalabel'; echo $?
+decho "# Test label: multiple arguments"
+tar --test-label --file=iamanarchive a iamalabel b; echo $?
+decho "# Test label: wildcards"
+tar --test-label --file=iamanarchive --wildcards '*label'; echo $?
+)
+--- -	2015-11-24 15:38:44.125127045 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/79/stderr	2015-11-24 15:38:44.118165445 +0800
+@@ -1,3 +1,8 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/79/test-source: line 57: genfile: command not found
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ # Display label
+ # Display label: unlabeled
+ # Test label: success
+79. label03.at:27: 79. test-label option (label03.at:27): expected failure (label03.at:30)

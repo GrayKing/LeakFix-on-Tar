@@ -1,0 +1,18 @@
+#                             -*- compilation -*-
+72. extrac16.at:26: testing extract empty directory with -C ...
+./extrac16.at:29:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir src src/a src/a/b dest
+touch src/a/c
+
+tar -cf archive.tar -C src a &&
+tar -xf archive.tar -C dest
+)
+72. extrac16.at:26: 72. extract empty directory with -C (extrac16.at:26): UNEXPECTED PASS     (0m0.000s 0m0.000s)

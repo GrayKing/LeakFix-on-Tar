@@ -1,0 +1,47 @@
+#                             -*- compilation -*-
+16. T-null.at:21: testing 0-separated file without -0 ...
+./T-null.at:24:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+echo jeden > temp
+echo dwa >> temp
+echo trzy >> temp
+cat temp | tr '\n' '\0' > file-list
+
+genfile -f jeden
+genfile -f dwa
+genfile -f trzy
+
+tar cfTv archive file-list
+)
+--- -	2015-11-24 15:38:33.630404770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/16/stderr	2015-11-24 15:38:33.626165809 +0800
+@@ -1,2 +1,9 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/16/test-source: line 57: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/16/test-source: line 58: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/16/test-source: line 59: genfile: command not found
+ tar: file-list: file name read contains nul character
++tar: jeden: Cannot stat: No such file or directory
++tar: dwa: Cannot stat: No such file or directory
++tar: trzy: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ 
+--- -	2015-11-24 15:38:33.632210571 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/16/stdout	2015-11-24 15:38:33.626165809 +0800
+@@ -1,4 +1 @@
+-jeden
+-dwa
+-trzy
+ 
+./T-null.at:24: exit code was 2, expected 0
+16. T-null.at:21: 16. 0-separated file without -0 (T-null.at:21): expected failure (T-null.at:24)

@@ -1,0 +1,33 @@
+#                             -*- compilation -*-
+20. verbose.at:26: testing tar cvf - ...
+./verbose.at:29:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --file file --length 10240
+echo Creating the archive
+tar cvf - file > archive
+echo Testing the archive
+tar tf archive
+)
+--- -	2015-11-24 15:38:33.865991578 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/20/stderr	2015-11-24 15:38:33.862165801 +0800
+@@ -1,2 +1,4 @@
+-file
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/20/test-source: line 39: genfile: command not found
++tar: file: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+ 
+--- -	2015-11-24 15:38:33.870407639 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/20/stdout	2015-11-24 15:38:33.866165801 +0800
+@@ -1,4 +1,3 @@
+ Creating the archive
+ Testing the archive
+-file
+ 
+20. verbose.at:26: 20. tar cvf - (verbose.at:26): expected failure (verbose.at:29)

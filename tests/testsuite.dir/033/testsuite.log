@@ -1,0 +1,148 @@
+#                             -*- compilation -*-
+33. xform-h.at:30: testing transforming hard links on create ...
+./xform-h.at:39:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir basedir
+echo "hello" > basedir/test
+ln basedir/test basedir/test_link
+
+
+echo "Default transform scope"
+tar cf archive --transform="s,^basedir/,," basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Transforming hard links"
+tar cf archive --transform="s,^basedir/,,h" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Not transforming hard links"
+tar cf archive --transform="s,^basedir/,,H" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+)
+./xform-h.at:39:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir basedir
+echo "hello" > basedir/test
+ln basedir/test basedir/test_link
+
+
+echo "Default transform scope"
+tar cf archive --transform="s,^basedir/,," basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Transforming hard links"
+tar cf archive --transform="s,^basedir/,,h" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Not transforming hard links"
+tar cf archive --transform="s,^basedir/,,H" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+)
+./xform-h.at:39:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir basedir
+echo "hello" > basedir/test
+ln basedir/test basedir/test_link
+
+
+echo "Default transform scope"
+tar cf archive --transform="s,^basedir/,," basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Transforming hard links"
+tar cf archive --transform="s,^basedir/,,h" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Not transforming hard links"
+tar cf archive --transform="s,^basedir/,,H" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+)
+./xform-h.at:39:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir basedir
+echo "hello" > basedir/test
+ln basedir/test basedir/test_link
+
+
+echo "Default transform scope"
+tar cf archive --transform="s,^basedir/,," basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Transforming hard links"
+tar cf archive --transform="s,^basedir/,,h" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Not transforming hard links"
+tar cf archive --transform="s,^basedir/,,H" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+)
+./xform-h.at:39:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir basedir
+echo "hello" > basedir/test
+ln basedir/test basedir/test_link
+
+
+echo "Default transform scope"
+tar cf archive --transform="s,^basedir/,," basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Transforming hard links"
+tar cf archive --transform="s,^basedir/,,h" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+
+echo "Not transforming hard links"
+tar cf archive --transform="s,^basedir/,,H" basedir/test basedir/test_link
+tar tvf archive | sed -n 's/.*test_link link to //p'
+
+)
+33. xform-h.at:30: 33. transforming hard links on create (xform-h.at:30): UNEXPECTED PASS     (0m0.016s 0m0.008s)

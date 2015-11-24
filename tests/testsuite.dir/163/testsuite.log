@@ -1,0 +1,49 @@
+#                             -*- compilation -*-
+163. remfiles08c.at:28: testing remove-files deleting two subdirs in -r mode ...
+./remfiles08c.at:31:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir foo
+mkdir bar
+echo foo/foo_file > foo/foo_file
+echo bar/bar_file > bar/bar_file
+tar -cf foo.tar -C foo . -C ../bar .
+decho A
+find . | sort
+decho B
+tar -rvf foo.tar --remove-files -C foo . -C ../bar .
+decho C
+find .
+)
+--- -	2015-11-24 15:39:31.515893302 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/163/stderr	2015-11-24 15:39:31.510163802 +0800
+@@ -1,4 +1,7 @@
+ A
+ B
++tar: /root/Desktop/tar-1.28/tests/testsuite.dir/163/gnu: Cannot rmdir: Directory not empty
++tar: /root/Desktop/tar-1.28/tests/testsuite.dir/163/gnu: Cannot rmdir: Directory not empty
++tar: Exiting with failure status due to previous errors
+ C
+ 
+--- -	2015-11-24 15:39:31.518708360 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/163/stdout	2015-11-24 15:39:31.514163802 +0800
+@@ -12,5 +12,9 @@
+ ./bar_file
+ C
+ .
++./bar
++./bar/bar_file
++./foo
++./foo/foo_file
+ ./foo.tar
+ 
+163. remfiles08c.at:28: 163. remove-files deleting two subdirs in -r mode (remfiles08c.at:28): expected failure (remfiles08c.at:31)

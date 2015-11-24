@@ -1,0 +1,8 @@
+c-ctype.o: c-ctype.c ../config.h c-ctype.h \
+  /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdbool.h
+
+../config.h:
+
+c-ctype.h:
+
+/mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdbool.h:

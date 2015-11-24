@@ -1,0 +1,83 @@
+#                             -*- compilation -*-
+58. extrac02.at:23: testing extracting symlinks over an existing file ...
+./extrac02.at:28:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+touch file
+ln -s file link 2> /dev/null || ln file link
+tar cf archive link
+rm link
+touch link
+tar xf archive
+)
+./extrac02.at:28:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+touch file
+ln -s file link 2> /dev/null || ln file link
+tar cf archive link
+rm link
+touch link
+tar xf archive
+)
+./extrac02.at:28:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+touch file
+ln -s file link 2> /dev/null || ln file link
+tar cf archive link
+rm link
+touch link
+tar xf archive
+)
+./extrac02.at:28:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+touch file
+ln -s file link 2> /dev/null || ln file link
+tar cf archive link
+rm link
+touch link
+tar xf archive
+)
+./extrac02.at:28:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+touch file
+ln -s file link 2> /dev/null || ln file link
+tar cf archive link
+rm link
+touch link
+tar xf archive
+)
+58. extrac02.at:23: 58. extracting symlinks over an existing file (extrac02.at:23): UNEXPECTED PASS     (0m0.000s 0m0.004s)

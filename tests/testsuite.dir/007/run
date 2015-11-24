@@ -1,0 +1,5 @@
+#! /bin/sh
+test "${ZSH_VERSION+set}" = set && alias -g '${1+"$@"}'='"$@"'
+cd '/root/Desktop/tar-1.28/tests'
+exec ${CONFIG_SHELL-/bin/bash} "/root/Desktop/tar-1.28/tests/./testsuite" -v -d  7 ${1+"$@"}
+exit 1

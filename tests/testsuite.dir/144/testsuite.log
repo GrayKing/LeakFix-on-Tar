@@ -1,0 +1,31 @@
+#                             -*- compilation -*-
+144. grow.at:24: testing grow ...
+./grow.at:27:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --file foo --length 50000k
+genfile --file baz
+genfile --run --checkpoint 10 --length 1024 --append foo -- tar --checkpoint -vcf bar foo baz
+)
+--- -	2015-11-24 15:39:30.798530572 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/144/stderr	2015-11-24 15:39:30.794163827 +0800
+@@ -1,2 +1,4 @@
+-tar: foo: file changed as we read it
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/144/test-source: line 37: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/144/test-source: line 38: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/144/test-source: line 39: genfile: command not found
+ 
+--- -	2015-11-24 15:39:30.800191317 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/144/stdout	2015-11-24 15:39:30.794163827 +0800
+@@ -1,3 +1 @@
+-foo
+-baz
+ 
+./grow.at:27: exit code was 127, expected 1
+144. grow.at:24: 144. grow (grow.at:24): expected failure (grow.at:27)

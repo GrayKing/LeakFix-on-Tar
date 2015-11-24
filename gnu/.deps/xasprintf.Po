@@ -1,0 +1,8 @@
+xasprintf.o: xasprintf.c ../config.h xvasprintf.h \
+  /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdarg.h
+
+../config.h:
+
+xvasprintf.h:
+
+/mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdarg.h:

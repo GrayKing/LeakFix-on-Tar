@@ -1,0 +1,68 @@
+#                             -*- compilation -*-
+28. append.at:21: testing append ...
+./append.at:24:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+touch file1
+          touch file2
+          tar cf archive file1
+          tar rf archive file2
+          tar tf archive)
+./append.at:24:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+touch file1
+          touch file2
+          tar cf archive file1
+          tar rf archive file2
+          tar tf archive)
+./append.at:24:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+touch file1
+          touch file2
+          tar cf archive file1
+          tar rf archive file2
+          tar tf archive)
+./append.at:24:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+touch file1
+          touch file2
+          tar cf archive file1
+          tar rf archive file2
+          tar tf archive)
+./append.at:24:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+touch file1
+          touch file2
+          tar cf archive file1
+          tar rf archive file2
+          tar tf archive)
+28. append.at:21: 28. append (append.at:21): UNEXPECTED PASS     (0m0.000s 0m0.000s)

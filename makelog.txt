@@ -1,0 +1,16 @@
+make  all-recursive
+make[1]: Entering directory `/root/Desktop/tar-1.28'
+Making all in doc
+make[2]: Entering directory `/root/Desktop/tar-1.28/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/root/Desktop/tar-1.28/doc'
+Making all in gnu
+make[2]: Entering directory `/root/Desktop/tar-1.28/gnu'
+make  all-recursive
+make[3]: Entering directory `/root/Desktop/tar-1.28/gnu'
+make[4]: Entering directory `/root/Desktop/tar-1.28/gnu'
+  CC       argp-help.o
+make[4]: Leaving directory `/root/Desktop/tar-1.28/gnu'
+make[3]: Leaving directory `/root/Desktop/tar-1.28/gnu'
+make[2]: Leaving directory `/root/Desktop/tar-1.28/gnu'
+make[1]: Leaving directory `/root/Desktop/tar-1.28'

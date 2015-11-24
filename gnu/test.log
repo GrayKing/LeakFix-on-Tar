@@ -1,0 +1,28 @@
+/mnt/data/llvm/Release+Asserts/bin/clang -cc1 
+-triple x86_64-unknown-linux-gnu 
+-emit-llvm-bc 
+-disable-free 
+-main-file-name 
+argp-help.c 
+-mrelocation-model 
+static 
+-mdisable-fp-elim 
+-fmath-errno 
+-masm-verbose 
+-mconstructor-aliases 
+-munwind-tables 
+-fuse-init-array 
+-target-cpu x86-64 
+-target-linker-version 2.24.51.20140707 
+-g 
+-coverage-file /root/Desktop/tar-1.28/gnu/argp-help.o 
+-resource-dir /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4 
+-dependency-file .deps/argp-help.Tpo 
+-sys-header-deps 
+-MP 
+-MT 
+argp-help.o 
+-D 
+HAVE_CONFIG_H 
+-I . -I .. -c-isystem /usr/include/x86_64-linux-gnu -cxx-isystem /usr/include/x86_64-linux-gnu -internal-isystem /usr/local/include -internal-isystem /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -fdebug-compilation-dir /root/Desktop/tar-1.28/gnu -ferror-limit 19 -fmessage-length 129 -mstackrealign -fobjc-runtime=gcc -fdiagnostics-show-option -fcolor-diagnostics -vectorize-slp -o argp-help.o -x c argp-help.c 
+

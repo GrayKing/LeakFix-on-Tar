@@ -1,0 +1,11 @@
+asnprintf.o: asnprintf.c ../config.h vasnprintf.h \
+  /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdarg.h \
+  /mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stddef.h
+
+../config.h:
+
+vasnprintf.h:
+
+/mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stdarg.h:
+
+/mnt/data/llvm/Release+Asserts/bin/../lib/clang/3.4/include/stddef.h:

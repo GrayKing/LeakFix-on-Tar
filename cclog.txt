@@ -1,0 +1,16 @@
+rmt/Makefile:CC = gcc -std=gnu99
+rmt/Makefile:ac_ct_CC = gcc
+scripts/Makefile:CC = gcc -std=gnu99
+scripts/Makefile:ac_ct_CC = gcc
+lib/Makefile:CC = gcc -std=gnu99
+lib/Makefile:ac_ct_CC = gcc
+tests/Makefile:CC = gcc -std=gnu99
+tests/Makefile:ac_ct_CC = gcc
+gnu/Makefile:CC = gcc -std=gnu99
+gnu/Makefile:ac_ct_CC = gcc
+doc/Makefile:CC = gcc -std=gnu99
+doc/Makefile:ac_ct_CC = gcc
+src/Makefile:CC = gcc -std=gnu99
+src/Makefile:ac_ct_CC = gcc
+Makefile:CC = gcc -std=gnu99
+Makefile:ac_ct_CC = gcc

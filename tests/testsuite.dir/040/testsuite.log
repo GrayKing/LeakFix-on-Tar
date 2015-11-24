@@ -1,0 +1,145 @@
+#                             -*- compilation -*-
+40. exclude05.at:21: testing exclude: lots of excludes ...
+./exclude05.at:24:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+rm -rf testdir exclfile
+mkdir -p testdir
+awk 'BEGIN {for (i=9; i < 100; ++i ) { print "testdir/file" i; }}' < /dev/null | \
+ while read name
+ do
+   genfile --file $name
+ done
+
+awk 'BEGIN {for (i=1000000; i >= 12; --i ) { print "testdir/file" i }}' < /dev/null > exclfile
+
+tar cf archive --anchored --exclude-from=exclfile \
+               testdir
+tar tf archive | sort
+
+echo "NEXT"
+tar cf archive --exclude-from=exclfile \
+               testdir
+tar tf archive | sort
+
+rm -rf testdir exclfile
+
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/stderr	2015-11-24 15:38:36.538165708 +0800
+@@ -0,0 +1,91 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/test-source: line 68: genfile: command not found
+--- -	2015-11-24 15:38:41.652006497 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/40/stdout	2015-11-24 15:38:41.646165531 +0800
+@@ -1,10 +1,4 @@
+ testdir/
+-testdir/file10
+-testdir/file11
+-testdir/file9
+ NEXT
+ testdir/
+-testdir/file10
+-testdir/file11
+-testdir/file9
+ 
+40. exclude05.at:21: 40. exclude: lots of excludes (exclude05.at:21): expected failure (exclude05.at:24)

@@ -1,0 +1,60 @@
+#                             -*- compilation -*-
+54. delete03.at:21: testing deleting members with long names ...
+./delete03.at:26:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+prefix=This_is_a_very_long_file_name_prefix_that_is_designed_to_cause_problems_with_file_names_that_run_into_a_limit_of_the_posix_tar_formatXX
+rm -f $prefix*
+for i in 1 2 3 4 5 6 7 8 9
+do touch $prefix$i
+done
+tar -cf archive ./$prefix* &&
+ tar --delete -f archive ./${prefix}5 &&
+ tar -tf archive
+)
+./delete03.at:26:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+prefix=This_is_a_very_long_file_name_prefix_that_is_designed_to_cause_problems_with_file_names_that_run_into_a_limit_of_the_posix_tar_formatXX
+rm -f $prefix*
+for i in 1 2 3 4 5 6 7 8 9
+do touch $prefix$i
+done
+tar -cf archive ./$prefix* &&
+ tar --delete -f archive ./${prefix}5 &&
+ tar -tf archive
+)
+./delete03.at:26:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+
+prefix=This_is_a_very_long_file_name_prefix_that_is_designed_to_cause_problems_with_file_names_that_run_into_a_limit_of_the_posix_tar_formatXX
+rm -f $prefix*
+for i in 1 2 3 4 5 6 7 8 9
+do touch $prefix$i
+done
+tar -cf archive ./$prefix* &&
+ tar --delete -f archive ./${prefix}5 &&
+ tar -tf archive
+)
+54. delete03.at:21: 54. deleting members with long names (delete03.at:21): UNEXPECTED PASS     (0m0.004s 0m0.024s)

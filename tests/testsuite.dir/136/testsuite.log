@@ -1,0 +1,41 @@
+#                             -*- compilation -*-
+136. update02.at:26: testing update changed files ...
+./update02.at:29:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir a
+genfile --file a/b
+
+tar cf arc a
+
+echo "separator"
+
+sleep 2
+touch a/b
+
+tar ufv arc a
+echo "separator"
+tar tf arc | sort || exit 1
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/136/stderr	2015-11-24 15:39:28.466163908 +0800
+@@ -0,0 +1 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/136/test-source: line 54: genfile: command not found
+--- -	2015-11-24 15:39:30.482606544 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/136/stdout	2015-11-24 15:39:30.478163838 +0800
+@@ -3,5 +3,4 @@
+ separator
+ a/
+ a/b
+-a/b
+ 
+136. update02.at:26: 136. update changed files (update02.at:26): expected failure (update02.at:29)

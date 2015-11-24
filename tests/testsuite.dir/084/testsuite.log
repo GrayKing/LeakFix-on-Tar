@@ -1,0 +1,54 @@
+#                             -*- compilation -*-
+84. incr02.at:32: testing restoring timestamps from incremental ...
+./incr02.at:35:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+# Create directory structure
+mkdir dir
+mkdir dir/subdir1
+mkdir dir/subdir2
+genfile --length 10 --file dir/subdir1/file
+
+# Save mtime for later comparison
+genfile --stat=mtime dir/subdir1 > ts
+
+# Create an archive. Using incremental mode makes sure the
+# archive will have a directory-first member ordering,
+# i.e.:
+# dir/
+# dir/subdir1/
+# dir/subdir2/
+# dir/subdir1/foofile
+#
+# When restoring from this directory structure, 'dir/subdir2/' used to
+# trigger apply_nonancestor_delayed_set_stat() which restored stats for
+# 'subdir1' prior to restoring 'dir/subdir1/foofile'. Then, restoring the
+# latter clobbered the directory timestamp.
+
+tar -cf archive -g db dir
+
+# Move away the directory
+mv dir orig
+
+# Wait enough time for timestamps to differ in case of failure.
+sleep 5
+
+# Restore the directory
+tar -xf archive dir
+
+# Check the timestamp
+genfile --stat=mtime dir/subdir1 | diff ts -
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/84/stderr	2015-11-24 15:38:58.454164948 +0800
+@@ -0,0 +1,3 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/84/test-source: line 73: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/84/test-source: line 76: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/84/test-source: line 103: genfile: command not found
+84. incr02.at:32: 84. restoring timestamps from incremental (incr02.at:32): expected failure (incr02.at:35)

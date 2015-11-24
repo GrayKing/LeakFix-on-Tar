@@ -1,0 +1,60 @@
+#                             -*- compilation -*-
+94. incr07.at:18: testing incremental restores with -C ...
+./incr07.at:40:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir dirA
+echo 'a' > dirA/a
+echo 'a' > dirA/b
+
+decho C0
+tar -g test.snar -vcf test.0.tar dirA
+
+echo 'a' > dirA/c
+decho C1
+tar -g test.snar -vcf test.1.tar dirA
+
+rm -f dirA/a
+decho C2
+tar -g test.snar -vcf test.2.tar dirA
+
+mkdir ext
+rm -rf dirA
+
+decho E0
+tar -g test.snar -vxf test.0.tar -C ext/
+decho E1
+tar -g test.snar -vxf test.1.tar -C ext/
+
+decho E2
+tar -g test.snar -vxf test.2.tar -C ext/
+
+mkdir ext/dirA/dirB
+touch ext/dirA/dirB/file
+
+decho E3
+tar -g test.snar -vxf test.2.tar -C ext/
+
+echo FIN
+test -d dirA && echo >&2 "toplevel dirA exists"
+exit 0
+)
+--- -	2015-11-24 15:39:17.645954560 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/94/stdout	2015-11-24 15:39:17.638164283 +0800
+@@ -16,9 +16,7 @@
+ dirA/c
+ E2
+ dirA/
+-tar: Deleting 'dirA/a'
+ E3
+ dirA/
+-tar: Deleting 'dirA/dirB'
+ FIN
+ 
+94. incr07.at:18: 94. incremental restores with -C (incr07.at:18): expected failure (incr07.at:40)

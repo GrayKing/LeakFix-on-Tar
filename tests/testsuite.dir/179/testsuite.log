@@ -1,0 +1,41 @@
+#                             -*- compilation -*-
+179. onetop01.at:21: testing tar --one-top-level ...
+./onetop01.at:24:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir a
+genfile --file a/b
+genfile --file c
+tar cf a.tar a c
+mkdir out
+cd out
+tar --one-top-level -x -f ../a.tar
+find . | sort
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/179/stderr	2015-11-24 15:39:32.086163782 +0800
+@@ -0,0 +1,6 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/179/test-source: line 49: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/179/test-source: line 50: genfile: command not found
++tar: c: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
++tar: unrecognized option '--one-top-level'
++Try `tar --help' or `tar --usage' for more information.
+--- -	2015-11-24 15:39:32.098390728 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/179/stdout	2015-11-24 15:39:32.094163782 +0800
+@@ -1,5 +1,2 @@
+ .
+-./a
+-./a/b
+-./a/c
+ 
+179. onetop01.at:21: 179. tar --one-top-level (onetop01.at:21): expected failure (onetop01.at:24)

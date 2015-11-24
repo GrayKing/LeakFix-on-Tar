@@ -1,0 +1,23 @@
+#                             -*- compilation -*-
+141. shortfile.at:26: testing short input files ...
+./shortfile.at:29:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --length 511 --file foo || exit 5
+tar tf foo
+)
+--- -	2015-11-24 15:39:30.676262674 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/141/stderr	2015-11-24 15:39:30.670163831 +0800
+@@ -1,3 +1,2 @@
+-tar: This does not look like a tar archive
+-tar: Exiting with failure status due to previous errors
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/141/test-source: line 36: genfile: command not found
+ 
+./shortfile.at:29: exit code was 5, expected 2
+141. shortfile.at:26: 141. short input files (shortfile.at:26): expected failure (shortfile.at:29)

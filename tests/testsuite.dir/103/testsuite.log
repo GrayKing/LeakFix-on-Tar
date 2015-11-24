@@ -1,0 +1,60 @@
+#                             -*- compilation -*-
+103. rename05.at:24: testing renamed subdirectories ...
+./rename05.at:27:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+
+decho Creating directory structure
+mkdir directory
+mkdir directory/subdir
+genfile --file=directory/file
+
+decho Creating initial archive
+tar -cf archive.1 -g db.1 directory
+
+decho Renaming
+mv directory/subdir directory/subdir.0
+mv directory dir
+
+decho Creating incremental archive
+cp db.1 db.2
+tar -cf archive.2 -g db.2 dir
+
+mv dir orig
+
+decho First restore
+tar -xf archive.1 -g db.1 --warning=no-timestamp
+find directory | sort
+
+decho Second restore
+tar -xf archive.2 -g db.2 --warning=no-timestamp
+find dir | sort
+)
+--- -	2015-11-24 15:39:20.296219723 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/103/stderr	2015-11-24 15:39:20.290164191 +0800
+@@ -1,4 +1,5 @@
+ Creating directory structure
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/103/test-source: line 70: genfile: command not found
+ Creating initial archive
+ Renaming
+ Creating incremental archive
+--- -	2015-11-24 15:39:20.297948810 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/103/stdout	2015-11-24 15:39:20.294164191 +0800
+@@ -4,7 +4,6 @@
+ Creating incremental archive
+ First restore
+ directory
+-directory/file
+ directory/subdir
+ Second restore
+ dir
+103. rename05.at:24: 103. renamed subdirectories (rename05.at:24): expected failure (rename05.at:27)

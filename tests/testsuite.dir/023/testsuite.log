@@ -1,0 +1,27 @@
+#                             -*- compilation -*-
+23. recurs02.at:30: testing recurse: toggle ...
+./recurs02.at:33:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory1 directory2
+touch directory1/file directory2/file
+tar --create --file archive \
+    --no-recursion directory1 \
+    --recursion directory2 || exit 1
+tar tf archive
+)
+--- -	2015-11-24 15:38:34.156146764 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/23/stdout	2015-11-24 15:38:34.150165791 +0800
+@@ -1,4 +1,5 @@
+ directory1/
++directory1/file
+ directory2/
+ directory2/file
+ 
+23. recurs02.at:30: 23. recurse: toggle (recurs02.at:30): expected failure (recurs02.at:33)

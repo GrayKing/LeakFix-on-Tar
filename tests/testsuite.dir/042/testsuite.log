@@ -1,0 +1,33 @@
+#                             -*- compilation -*-
+42. exclude07.at:19: testing exclude: --exclude-backups option ...
+./exclude07.at:22:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir dir
+genfile --file dir/file
+genfile --file dir/file~
+genfile --file "dir/.#file"
+genfile --file "dir/#file#"
+
+tar -v -c -f archive --exclude-backups dir
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/42/stderr	2015-11-24 15:38:41.730165528 +0800
+@@ -0,0 +1,4 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/42/test-source: line 42: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/42/test-source: line 43: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/42/test-source: line 44: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/42/test-source: line 45: genfile: command not found
+--- -	2015-11-24 15:38:41.741606237 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/42/stdout	2015-11-24 15:38:41.734165528 +0800
+@@ -1,3 +1,2 @@
+ dir/
+-dir/file
+ 
+42. exclude07.at:19: 42. exclude: --exclude-backups option (exclude07.at:19): expected failure (exclude07.at:22)

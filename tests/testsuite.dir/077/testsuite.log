@@ -1,0 +1,32 @@
+#                             -*- compilation -*-
+77. label01.at:21: testing single-volume label ...
+./label01.at:24:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+genfile --file foo
+genfile --file bar
+tar -cf archive --label=Test foo bar
+tar tf archive
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/77/stderr	2015-11-24 15:38:43.994165450 +0800
+@@ -0,0 +1,5 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/77/test-source: line 38: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/77/test-source: line 39: genfile: command not found
++tar: foo: Cannot stat: No such file or directory
++tar: bar: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+--- -	2015-11-24 15:38:44.003784522 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/77/stdout	2015-11-24 15:38:43.998165449 +0800
+@@ -1,4 +1,2 @@
+ Test
+-foo
+-bar
+ 
+77. label01.at:21: 77. single-volume label (label01.at:21): expected failure (label01.at:24)

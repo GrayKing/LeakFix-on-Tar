@@ -1,0 +1,93 @@
+#                             -*- compilation -*-
+24. shortrec.at:25: testing short records ...
+./shortrec.at:28:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+(cd directory && touch a b c d e f g h i j k l m n o p q r)
+tar -c -b 1 -f - directory | tar -t -f - > /dev/null
+tar -c -b 1 -f archive directory
+tar -t -f archive > /dev/null
+tar -t -f - < archive > /dev/null
+
+rm -r directory
+)
+./shortrec.at:28:
+mkdir oldgnu
+(cd oldgnu
+TEST_TAR_FORMAT=oldgnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H oldgnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+(cd directory && touch a b c d e f g h i j k l m n o p q r)
+tar -c -b 1 -f - directory | tar -t -f - > /dev/null
+tar -c -b 1 -f archive directory
+tar -t -f archive > /dev/null
+tar -t -f - < archive > /dev/null
+
+rm -r directory
+)
+./shortrec.at:28:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+(cd directory && touch a b c d e f g h i j k l m n o p q r)
+tar -c -b 1 -f - directory | tar -t -f - > /dev/null
+tar -c -b 1 -f archive directory
+tar -t -f archive > /dev/null
+tar -t -f - < archive > /dev/null
+
+rm -r directory
+)
+./shortrec.at:28:
+mkdir posix
+(cd posix
+TEST_TAR_FORMAT=posix
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H posix"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+(cd directory && touch a b c d e f g h i j k l m n o p q r)
+tar -c -b 1 -f - directory | tar -t -f - > /dev/null
+tar -c -b 1 -f archive directory
+tar -t -f archive > /dev/null
+tar -t -f - < archive > /dev/null
+
+rm -r directory
+)
+./shortrec.at:28:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir directory
+(cd directory && touch a b c d e f g h i j k l m n o p q r)
+tar -c -b 1 -f - directory | tar -t -f - > /dev/null
+tar -c -b 1 -f archive directory
+tar -t -f archive > /dev/null
+tar -t -f - < archive > /dev/null
+
+rm -r directory
+)
+24. shortrec.at:25: 24. short records (shortrec.at:25): UNEXPECTED PASS     (0m0.000s 0m0.044s)

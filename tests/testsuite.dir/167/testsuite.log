@@ -1,0 +1,39 @@
+#                             -*- compilation -*-
+167. remfiles10.at:20: testing remove-files ...
+./remfiles10.at:23:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir foo
+echo foo/file > foo/file
+decho A
+(cd foo && tar -cvf ../foo.tar --remove-files .)
+tar_status=$?
+decho B
+find foo
+exit $tar_status
+)
+--- -	2015-11-24 15:39:31.657433185 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/167/stderr	2015-11-24 15:39:31.650163797 +0800
+@@ -1,5 +1,4 @@
+ A
+-tar: .: Cannot rmdir: Invalid argument
+-tar: Exiting with failure status due to previous errors
+ B
++find: `foo': No such file or directory
+ 
+--- -	2015-11-24 15:39:31.659017184 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/167/stdout	2015-11-24 15:39:31.654163797 +0800
+@@ -2,5 +2,4 @@
+ ./
+ ./file
+ B
+-foo
+ 
+./remfiles10.at:23: exit code was 0, expected 2
+167. remfiles10.at:20: 167. remove-files (remfiles10.at:20): expected failure (remfiles10.at:23)

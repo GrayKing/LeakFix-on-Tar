@@ -1,0 +1,29 @@
+#                             -*- compilation -*-
+11. T-mult.at:21: testing multiple file lists ...
+./T-mult.at:24:
+mkdir ustar
+(cd ustar
+TEST_TAR_FORMAT=ustar
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H ustar"
+export TAR_OPTIONS
+rm -rf *
+
+>file1
+>file2
+>file3
+>file4
+cat >F1 <<'_ATEOF'
+file1
+file2
+_ATEOF
+
+cat >F2 <<'_ATEOF'
+file3
+file4
+_ATEOF
+
+tar cf archive -T F1 -T F2
+tar tf archive
+)
+11. T-mult.at:21: 11. multiple file lists (T-mult.at:21): UNEXPECTED PASS     (0m0.000s 0m0.000s)

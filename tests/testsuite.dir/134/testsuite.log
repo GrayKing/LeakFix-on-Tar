@@ -1,0 +1,39 @@
+#                             -*- compilation -*-
+134. update.at:28: testing update unchanged directories ...
+./update.at:31:
+mkdir v7
+(cd v7
+TEST_TAR_FORMAT=v7
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H v7"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir directory
+genfile --length 10240 --pattern zeros --file directory/file1
+genfile --length 10240 --pattern default --file directory/file2
+
+tar cf archive directory || exit 1
+echo separator
+tar uf archive directory || exit 1
+echo separator
+tar tf archive | sort || exit 1
+)
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/134/stderr	2015-11-24 15:39:26.398163980 +0800
+@@ -0,0 +1,2 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/134/test-source: line 50: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/134/test-source: line 51: genfile: command not found
+--- -	2015-11-24 15:39:26.412751973 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/134/stdout	2015-11-24 15:39:26.406163979 +0800
+@@ -1,6 +1,4 @@
+ separator
+ separator
+ directory/
+-directory/file1
+-directory/file2
+ 
+134. update.at:28: 134. update unchanged directories (update.at:28): expected failure (update.at:31)

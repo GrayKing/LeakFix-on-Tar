@@ -1,0 +1,29 @@
+#                             -*- compilation -*-
+145. sigpipe.at:21: testing sigpipe handling ...
+./sigpipe.at:30:
+
+case `(cat "$at_myself" 2>&3 | :) 3>&1 >/dev/null` in #(
+?*) exit 77;;
+esac
+
+
+genfile --length 2048 --file first
+genfile --length 2048 --file second
+genfile --length 2049 --file third
+
+tar cf archive first second third
+
+# Discard diagnostics that some shells generate about broken pipes.
+(tar tf archive 2>&3 | :) 3>&2 2>/dev/null
+
+--- /dev/null	2015-11-23 14:28:24.110557770 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/145/stderr	2015-11-24 15:39:30.818163826 +0800
+@@ -0,0 +1,7 @@
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/145/test-source: line 41: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/145/test-source: line 42: genfile: command not found
++/root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/145/test-source: line 43: genfile: command not found
++tar: first: Cannot stat: No such file or directory
++tar: second: Cannot stat: No such file or directory
++tar: third: Cannot stat: No such file or directory
++tar: Exiting with failure status due to previous errors
+145. sigpipe.at:21: 145. sigpipe handling (sigpipe.at:21): FAILED (sigpipe.at:30)

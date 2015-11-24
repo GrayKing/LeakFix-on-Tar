@@ -1,0 +1,36 @@
+#                             -*- compilation -*-
+151. remfiles04c.at:33: testing remove-files with -C:rel in -r mode ...
+./remfiles04c.at:36:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+
+test -z "`sort < /dev/null 2>&1`" || exit 77
+
+mkdir foo
+echo bar > bar
+echo foobar > foo/bar
+tar -cf foo.tar -C foo bar
+echo A
+find . | sort
+tar -rf foo.tar --remove-files -C foo bar
+echo B
+find . | sort
+)
+--- -	2015-11-24 15:39:31.039875794 +0800
++++ /root/Desktop/tar-1.28/tests/testsuite.dir/at-groups/151/stdout	2015-11-24 15:39:31.034163819 +0800
+@@ -6,7 +6,7 @@
+ ./foo/bar
+ B
+ .
+-./bar
+ ./foo
+ ./foo.tar
++./foo/bar
+ 
+151. remfiles04c.at:33: 151. remove-files with -C:rel in -r mode (remfiles04c.at:33): expected failure (remfiles04c.at:36)

@@ -1,0 +1,21 @@
+#                             -*- compilation -*-
+161. remfiles08a.at:28: testing remove-files deleting two subdirs in -c/non-incr. mode ...
+./remfiles08a.at:31:
+mkdir gnu
+(cd gnu
+TEST_TAR_FORMAT=gnu
+export TEST_TAR_FORMAT
+TAR_OPTIONS="-H gnu"
+export TAR_OPTIONS
+rm -rf *
+
+mkdir foo
+mkdir bar
+echo foo/foo_file > foo/foo_file
+echo bar/bar_file > bar/bar_file
+decho A
+tar -cvf foo.tar --remove-files -C foo . -C ../bar .
+decho B
+find .
+)
+161. remfiles08a.at:28: 161. remove-files deleting two subdirs in -c/non-incr. mode (remfiles08a.at:28): UNEXPECTED PASS     (0m0.000s 0m0.000s)
